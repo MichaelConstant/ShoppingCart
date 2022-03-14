@@ -8,34 +8,37 @@ public class SprintComponent : MonoBehaviour
 {
     private Rigidbody _rigidbody;
 
-    public GameObject ForwardResource;
+    public Transform ForwardResource;
     public GameObject RightHandGameObject;
     public GameObject LeftHandGameObject;
 
-    public Transform StartChargingTransform;
-    public Transform EndChargingTransform;
-
-    public float SprintSpeedMultiplier = 5f;
-    public float FrictionRate = 0.5f;
-    private float _localFrictionRate;
-
-    private float _leftHandSprintTimer = 0f;
-    private float _rightHandSprintTimer = 0f;
-
     private bool _isLeftHandSprint;
     private bool _isRightHandSprint;
+
+    private float _leftSprintTimer;
+    private float _rightSprintTimer;
+
+    private Vector3 _leftHandStartPos;
+    private Vector3 _rightHandStartPos;
 
     [SerializeField]
     private XRNode _leftHandButton;
     [SerializeField]
     private XRNode _rightHandButton;
 
-    private List<InputDevice> _inputDevices = new List<InputDevice>();
+    private List<InputDevice> _leftInputDevices = new List<InputDevice>();
+    private List<InputDevice> _rightInputDevices = new List<InputDevice>();
     private InputDevice _rightHandInputDevice;
     private InputDevice _leftHandInputDevice;
 
     private bool _isLeftHandButtonPressed;
     private bool _isRightHandButtonPressed;
+
+    [Space(5)]
+    [Header("Velocity Arguments")]
+    public float MaxMoveVelocity = 5f;
+    public float FrictionRate = 0.5f;
+    public float CriticalStopVelocity = 0.5f;
 
     #region Unity Methods
     private void OnEnable()
@@ -55,75 +58,76 @@ public class SprintComponent : MonoBehaviour
             GetDevice();
         }
 
-        _localFrictionRate = FrictionRate;
+        _leftHandStartPos = LeftHandGameObject.transform.position;
+        _rightHandStartPos = RightHandGameObject.transform.position;
     }
 
     private void Update()
     {
         _leftHandInputDevice.TryGetFeatureValue(CommonUsages.triggerButton, out _isLeftHandButtonPressed);
         _rightHandInputDevice.TryGetFeatureValue(CommonUsages.triggerButton, out _isRightHandButtonPressed);
-
-        Debug.Log(_isLeftHandButtonPressed || _isRightHandButtonPressed);
     }
 
     private void FixedUpdate()
     {
         if (!_rigidbody) return;
-        MoveFriction();
-        SprintMove(LeftHandGameObject, _isLeftHandButtonPressed, ref _leftHandSprintTimer, ref _isLeftHandSprint);
-        SprintMove(RightHandGameObject, _isRightHandButtonPressed, ref _rightHandSprintTimer, ref _isRightHandSprint);
+
+        SprintMove(LeftHandGameObject, _isLeftHandButtonPressed, ref _isLeftHandSprint, ref _leftSprintTimer, ref _leftHandStartPos);
+        SprintMove(RightHandGameObject, _isRightHandButtonPressed, ref _isRightHandSprint, ref _rightSprintTimer, ref _rightHandStartPos);
+
+        TurnToForward();
     }
     #endregion
 
     #region Custom Methods
-    private void SprintMove(GameObject handObject, bool isPressedButton, ref float sprintTimer, ref bool isSprinting)
+    private void SprintMove(GameObject handObject, bool isPressedButton, ref bool isSprinting, ref float timer, ref Vector3 startPosition)
     {
+        /// Press Button and Set Start Position
+        /// 
         if (isPressedButton)
         {
-            // Arrive Start Position, Always Set timer => 0
-            if (handObject.transform.position.y >= StartChargingTransform.position.y)
-            {
-                sprintTimer = 0f;
-                isSprinting = true;
-                _localFrictionRate = 0f;
-            }
+            startPosition = startPosition.y >= handObject.transform.position.y ? startPosition : handObject.transform.position;
+            isSprinting = true;
+            timer = 0f;
         }
 
-        // Smaller than Start Position, Start Timer
-        if (handObject.transform.position.y >= StartChargingTransform.position.y || !isSprinting) return;
+        /// Start Timer
+        /// 
+        if (!isSprinting) return;
+        timer += Time.deltaTime;
 
-        sprintTimer += Time.deltaTime;
+        /// Release Button and Accelerate
+        /// 
+        if (isPressedButton || handObject.transform.position.y >= startPosition.y) return;
 
-        // Arrive End Position, Accelerate Player According To Timer.
-        if (handObject.transform.position.y >= EndChargingTransform.position.y) return;
+        /// Acceleration Formula: 
+        /// 
+        /// define the acceleration
+        /// 
+        float distance = startPosition.y - handObject.transform.position.y;
+        float velocity = distance / timer;
+        float acceleration = Mathf.Abs(velocity * (MaxMoveVelocity - _rigidbody.velocity.magnitude) / MaxMoveVelocity) * 30;
 
-        // Release TriggerButton to Activate Acceleration
-        if (isPressedButton) return;
-
-        // Acceleration Formula: 
-        _rigidbody.velocity += ForwardResource.transform.forward * SprintSpeedMultiplier / sprintTimer * Time.fixedDeltaTime;
+        if (_rigidbody.velocity.magnitude >= MaxMoveVelocity) return;
+        _rigidbody.AddForce(ForwardResource.forward * acceleration);
+        //_rigidbody.velocity = _rigidbody.velocity.magnitude >= MaxMoveVelocity ? _rigidbody.velocity : _rigidbody.velocity + ForwardResource.forward * acceleration;
 
         isSprinting = false;
-
-        _localFrictionRate = FrictionRate;
     }
 
     private void GetDevice()
     {
-        InputDevices.GetDevicesAtXRNode(_leftHandButton, _inputDevices);
-        _leftHandInputDevice = _inputDevices.FirstOrDefault();
-        InputDevices.GetDevicesAtXRNode(_rightHandButton, _inputDevices);
-        _rightHandInputDevice = _inputDevices.FirstOrDefault();
+        InputDevices.GetDevicesAtXRNode(_leftHandButton, _leftInputDevices);
+        _leftHandInputDevice = _leftInputDevices.FirstOrDefault();
+        InputDevices.GetDevicesAtXRNode(_rightHandButton, _rightInputDevices);
+        _rightHandInputDevice = _rightInputDevices.FirstOrDefault();
     }
 
-    private void MoveFriction()
+    private void TurnToForward()
     {
-        Vector3 horizontalSpeed = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
-        float angle = Vector3.Dot(horizontalSpeed, transform.forward) / horizontalSpeed.magnitude;
-
-        if (angle <= 0f || horizontalSpeed.magnitude <= 0.1f) return;
-
-        _rigidbody.AddForce(-transform.forward * _localFrictionRate);
+        float angleCos = Vector3.Dot(_rigidbody.velocity, ForwardResource.forward) / ForwardResource.forward.magnitude / _rigidbody.velocity.magnitude;
+        if (angleCos == 0) return;
+        _rigidbody.velocity = ForwardResource.forward * _rigidbody.velocity.magnitude;
     }
     #endregion
 }

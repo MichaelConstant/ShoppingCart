@@ -27,6 +27,7 @@ public class SprintComponent : MonoBehaviour
     [Space(5)]
     [Header("Velocity Arguments")]
     public float MaxMoveVelocity = 20f;
+    public float CriticalDistance = 0.3f;
 
     #region Unity Methods
     private void Start()
@@ -75,6 +76,7 @@ public class SprintComponent : MonoBehaviour
         // Acceleration Formula: 
         if (_rigidbody.velocity.magnitude >= MaxMoveVelocity) return;
         var distance = startPosition.y - handObject.transform.position.y;
+        if (distance <= CriticalDistance) return;
         var velocity = distance / timer;
         var acceleration = Mathf.Abs(velocity * (MaxMoveVelocity - _rigidbody.velocity.magnitude) / MaxMoveVelocity) * 30;
         _rigidbody.AddForce(ForwardResource.forward * acceleration);

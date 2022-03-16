@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,40 +7,12 @@ using UnityEngine.XR;
 
 public class TestScript : MonoBehaviour
 {
-    [SerializeField]
-    private XRNode _xrNode;
-
-    private List<InputDevice> _inputDevices = new List<InputDevice>();
-
-    private InputDevice _inputDevice;
-
-    private void OnEnable()
-    {
-        if (!_inputDevice.isValid)
-        {
-            GetDevice();
-        }
-    }
+    public Vector3 TransformOffset;
 
     private void Update()
     {
-        if (!_inputDevice.isValid)
-        {
-            GetDevice();
-        }
-
-        bool isTriggerButtonPressed = false;
-
-        if (_inputDevice.TryGetFeatureValue(CommonUsages.triggerButton, out isTriggerButtonPressed) && isTriggerButtonPressed)
-        {
-            Debug.Log(isTriggerButtonPressed);
-        }
-
-    }
-
-    private void GetDevice()
-    {
-        InputDevices.GetDevicesAtXRNode(_xrNode, _inputDevices);
-        _inputDevice = _inputDevices.FirstOrDefault();
+        var position = transform.position;
+        position = new Vector3(position.x, TransformOffset.y, position.z);
+        transform.position = position;
     }
 }

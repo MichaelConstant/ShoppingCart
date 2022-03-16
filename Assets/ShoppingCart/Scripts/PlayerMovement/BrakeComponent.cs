@@ -6,10 +6,10 @@ using UnityEngine.XR;
 public class BrakeComponent : MonoBehaviour
 {
     public float BrakeVelocity = 2f;
-    private float _synergyMultiplier = 1.5f;
+    private const float SYNERGY_MULTIPLIER = 1.5f;
 
     public Transform ForwardResource;
-
+    
     private Rigidbody _rigidbody;
 
     private bool _isPressedLeftButton;
@@ -24,20 +24,19 @@ public class BrakeComponent : MonoBehaviour
     {
         DeviceManager.Instance.LeftHandDevice.TryGetFeatureValue(CommonUsages.gripButton, out _isPressedLeftButton);
         DeviceManager.Instance.RightHandDevice.TryGetFeatureValue(CommonUsages.gripButton, out _isPressedRightButton);
-        Debug.Log(_isPressedLeftButton);
     }
 
     private void FixedUpdate()
     {
         if (!_rigidbody) return;
 
-        float brakeVelocity = BrakeVelocity;
+        var brakeVelocity = BrakeVelocity;
 
         if (!_isPressedLeftButton || !_isPressedRightButton || _rigidbody.velocity.magnitude <= 3f) return;
 
         if (_isPressedLeftButton && _isPressedRightButton)
         {
-            brakeVelocity *= _synergyMultiplier;
+            brakeVelocity *= SYNERGY_MULTIPLIER;
         }
 
         _rigidbody.velocity -= ForwardResource.forward * brakeVelocity;

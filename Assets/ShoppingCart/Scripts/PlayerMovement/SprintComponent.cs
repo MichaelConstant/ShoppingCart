@@ -26,7 +26,7 @@ public class SprintComponent : MonoBehaviour
 
     [Space(5)]
     [Header("Velocity Arguments")]
-    public float MaxMoveVelocity = 5f;
+    public float MaxMoveVelocity = 20f;
 
     #region Unity Methods
     private void Start()
@@ -74,9 +74,9 @@ public class SprintComponent : MonoBehaviour
 
         // Acceleration Formula: 
         if (_rigidbody.velocity.magnitude >= MaxMoveVelocity) return;
-        float distance = startPosition.y - handObject.transform.position.y;
-        float velocity = distance / timer;
-        float acceleration = Mathf.Abs(velocity * (MaxMoveVelocity - _rigidbody.velocity.magnitude) / MaxMoveVelocity) * 30;
+        var distance = startPosition.y - handObject.transform.position.y;
+        var velocity = distance / timer;
+        var acceleration = Mathf.Abs(velocity * (MaxMoveVelocity - _rigidbody.velocity.magnitude) / MaxMoveVelocity) * 30;
         _rigidbody.AddForce(ForwardResource.forward * acceleration);
 
         isSprinting = false;
@@ -84,7 +84,8 @@ public class SprintComponent : MonoBehaviour
 
     private void TurnToForward()
     {
-        float angleCos = Vector3.Dot(_rigidbody.velocity, ForwardResource.forward) / ForwardResource.forward.magnitude / _rigidbody.velocity.magnitude;
+        var forward = ForwardResource.forward;
+        var angleCos = Vector3.Dot(_rigidbody.velocity, forward) / forward.magnitude / _rigidbody.velocity.magnitude;
         if (angleCos == 0) return;
         _rigidbody.velocity = ForwardResource.forward * _rigidbody.velocity.magnitude;
     }

@@ -6669,6 +6669,7 @@ MonoBehaviour:
   RightHandGameObject: {fileID: 762599701}
   LeftHandGameObject: {fileID: 1310138856}
   MaxMoveVelocity: 20
+  CriticalDistance: 0.3
 --- !u!54 &1629618884
 Rigidbody:
   m_ObjectHideFlags: 0

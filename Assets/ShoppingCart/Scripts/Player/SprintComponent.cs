@@ -82,6 +82,7 @@ public class SprintComponent : MonoBehaviour
         _rigidbody.AddForce(ForwardResource.forward * acceleration);
 
         isSprinting = false;
+        startPosition = handObject.transform.position;
     }
 
     private void TurnToForward()

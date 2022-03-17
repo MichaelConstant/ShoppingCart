@@ -1686,6 +1686,7 @@ GameObject:
   - component: {fileID: 504110925}
   - component: {fileID: 504110927}
   - component: {fileID: 504110928}
+  - component: {fileID: 504110929}
   m_Layer: 7
   m_Name: Character_Model
   m_TagString: Untagged
@@ -1792,7 +1793,7 @@ MonoBehaviour:
   Head:
     VRTarget: {fileID: 657650981}
     RigTarget: {fileID: 2113627142}
-    TrackingPositionOffset: {x: 0, y: 1, z: 0}
+    TrackingPositionOffset: {x: 0, y: 0, z: 0}
     TrackingRotationOffset: {x: 0, y: 0, z: 0}
   LeftHand:
     VRTarget: {fileID: 1615474061}
@@ -1805,7 +1806,7 @@ MonoBehaviour:
     TrackingPositionOffset: {x: 0, y: 0, z: 0}
     TrackingRotationOffset: {x: 90, y: -90, z: 0}
   HeadConstraint: {fileID: 2113627142}
-  BodyOffset: {x: 0, y: 1, z: 0}
+  BodyOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &504110928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1823,6 +1824,19 @@ MonoBehaviour:
   LeftFootRotWeight: 1
   RightFootPosWeight: 1
   RightFootRotWeight: 1
+--- !u!114 &504110929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504110924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2633df3e1322081489f85af56f786bb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  XROrigin: {fileID: 1629618878}
 --- !u!1 &504111746
 GameObject:
   m_ObjectHideFlags: 0

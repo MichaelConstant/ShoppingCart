@@ -22,8 +22,8 @@ public class BrakeComponent : MonoBehaviour
 
     private void Update()
     {
-        DeviceManager.Instance.LeftHandDevice.TryGetFeatureValue(CommonUsages.gripButton, out _isPressedLeftButton);
-        DeviceManager.Instance.RightHandDevice.TryGetFeatureValue(CommonUsages.gripButton, out _isPressedRightButton);
+        DeviceManager.Instance.LeftHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out _isPressedLeftButton);
+        DeviceManager.Instance.RightHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out _isPressedRightButton);
     }
 
     private void FixedUpdate()

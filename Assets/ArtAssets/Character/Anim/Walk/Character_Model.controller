@@ -27,7 +27,7 @@ BlendTree:
     m_DirectBlendParameter: RightVelocity
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 56bd985b949e5d049ade9a145af31e9b,
+    m_Motion: {fileID: -203655887218126122, guid: c8c1fef2fe3e09f43a4bc6a173a4cc43,
       type: 3}
     m_Threshold: 0.6666667
     m_Position: {x: 3, y: 0}
@@ -36,7 +36,7 @@ BlendTree:
     m_DirectBlendParameter: RightVelocity
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: b4e1bedfe5fac1842acda5ed5bf6cd95,
+    m_Motion: {fileID: -203655887218126122, guid: c077caa1f71df2043ab61ac7bb9ab16c,
       type: 3}
     m_Threshold: 1
     m_Position: {x: 5, y: 0}
@@ -87,13 +87,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ForwardVelocity
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

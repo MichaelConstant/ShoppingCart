@@ -27,7 +27,7 @@ public class SprintComponent : MonoBehaviour
     [Space(5)]
     [Header("Velocity Arguments")]
     public float MaxMoveVelocity = 20f;
-    public float CriticalDistance = 0.3f;
+    public float CriticalDistance = 0.15f;
 
     #region Unity Methods
     private void Start()

@@ -7,12 +7,14 @@ using UnityEngine.XR;
 
 public class TestScript : MonoBehaviour
 {
-    public Vector3 TransformOffset;
 
-    private void Update()
+    public void OnTestEnter()
     {
-        var position = transform.position;
-        position = new Vector3(position.x, TransformOffset.y, position.z);
-        transform.position = position;
+        Debug.Log("Enter");
+    }
+
+    public void OnTestEnd()
+    {
+        Debug.Log(("Exit"));
     }
 }

@@ -4,7 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/ShoppingCart/Scenes/LoginScene.unity
+    guid: 8acc1b01bd9aa504fb636c8c08e8eb9d
+  - enabled: 1
+    path: Assets/ShoppingCart/Scenes/LobbyScene.unity
+    guid: b7e00030db5343845915a10ecc2bcae9
+  - enabled: 1
+    path: Assets/ShoppingCart/Scenes/TestGameScene.unity
+    guid: be98bf85ea9a6b642995b9d463eb25d9
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260,
       type: 2}

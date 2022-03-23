@@ -22,7 +22,7 @@ public class GoodComponent : MonoBehaviour
     private void Update()
     {
         if(!_canCalculate) return;
-        float distance = Vector3.Distance(_player.transform.position, transform.position);
+        var distance = Vector3.Distance(_player.transform.position, transform.position);
         if(distance >= _DISTANCETODESTORY) return;
         Destroy(gameObject);
     }

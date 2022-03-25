@@ -17,6 +17,7 @@ public class RayComponent : MonoBehaviour
     public DeviceName MyDevice;
     
     private LineRenderer _lineRenderer;
+    private XRRayInteractor _xrRayInteractor;
     private XRInteractorLineVisual _interactorLineVisual;
 
     private bool _isPressedButton;
@@ -24,6 +25,7 @@ public class RayComponent : MonoBehaviour
     private void Start()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        _xrRayInteractor = GetComponent<XRRayInteractor>();
         _interactorLineVisual = GetComponent<XRInteractorLineVisual>();
     }
 
@@ -41,8 +43,15 @@ public class RayComponent : MonoBehaviour
                 return;
         }
 
-        if (!_interactorLineVisual || !_lineRenderer) return;
-        _interactorLineVisual.enabled = _isPressedButton;
-        _lineRenderer.enabled = _isPressedButton;
+        var ray = new Ray(transform.position, transform.forward);
+
+        if (!Physics.Raycast(ray, out var hitInfo, _xrRayInteractor.maxRaycastDistance)) return;
+        
+        if (!hitInfo.collider.GetComponent<GoodComponent>()) return;
+
+        
+        // if (!_interactorLineVisual || !_lineRenderer) return;
+        //_interactorLineVisual.enabled = _isPressedButton;
+        // _lineRenderer.enabled = _isPressedButton;
     }
 }

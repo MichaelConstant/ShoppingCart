@@ -4,37 +4,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
-[System.Serializable]
-public enum MapLibrary
-{
-    TestScene,
-}
-
-[System.Serializable]
-public struct MapType
-{
-    public MapLibrary MapLibrary;
-    public string SceneName;
-
-    public MapType(MapLibrary mapLibrary, string sceneName)
-    {
-        MapLibrary = mapLibrary;
-        SceneName = sceneName;
-    }
-}
+// [System.Serializable]
+// public struct MapType
+// {
+//     public MapLibrary MapLibrary;
+//     public string SceneName;
+//
+//     public MapType(MapLibrary mapLibrary, string sceneName)
+//     {
+//         MapLibrary = mapLibrary;
+//         SceneName = sceneName;
+//     }
+// }
 
 public class PhotonRoomSystem : MonoBehaviourPunCallbacks
 {
-    public List<MapType> MapType = new List<MapType>();
-    
+    public TextMeshProUGUI PlayerCountTextMeshPro;
+
     private string _mapType;
 
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
+
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            PhotonNetwork.JoinLobby();
+        }
     }
 
     #region UI Callback Methods
@@ -91,13 +91,36 @@ public class PhotonRoomSystem : MonoBehaviourPunCallbacks
         Debug.Log("Current Room Players: " + PhotonNetwork.CurrentRoom.PlayerCount);
     }
 
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        if (roomList.Count == 0)
+        {
+            // No Room At All
+            PlayerCountTextMeshPro.text = 0 + "/" + 4;
+        }
+
+        foreach (var room in roomList)
+        {
+            Debug.Log(room.Name);
+            if (room.Name.Contains(ConstantLibrary.MAP_TYPE_VALUE_TEST))
+            {
+                PlayerCountTextMeshPro.text = room.PlayerCount + "/" + 4;
+            }
+        }
+    }
+
+    public override void OnJoinedLobby()
+    {
+        Debug.Log("Joined Lobby");
+    }
+
     #endregion
 
     #region Custom Methods
 
     private void CreateRoom()
     {
-        var randomRoomName = "Room_" + Random.Range(0, 100);
+        var randomRoomName = "Room_" + _mapType + Random.Range(0, 100);
         var roomOptions = new RoomOptions
         {
             MaxPlayers = 4

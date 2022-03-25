@@ -49,7 +49,7 @@ public class RayComponent : MonoBehaviour
         
         if (!hitInfo.collider.GetComponent<GoodComponent>()) return;
 
-        
+        Debug.Log("Can Be Purchased");
         // if (!_interactorLineVisual || !_lineRenderer) return;
         //_interactorLineVisual.enabled = _isPressedButton;
         // _lineRenderer.enabled = _isPressedButton;

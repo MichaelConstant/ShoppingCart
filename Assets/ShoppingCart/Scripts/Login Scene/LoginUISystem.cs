@@ -13,6 +13,4 @@ public class LoginUISystem : MonoBehaviour
         ConnectOptionsPanelGameObject.SetActive(true);
         SignInPanelGameObject.SetActive(false);
     }
-    
-    
 }

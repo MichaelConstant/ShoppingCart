@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class LocalPlayerUIComponent : MonoBehaviour
 {
-    private GameObject BackToLobbyButton;
+    public  GameObject BackToLobbyButton;
 
     private void Start()
     {

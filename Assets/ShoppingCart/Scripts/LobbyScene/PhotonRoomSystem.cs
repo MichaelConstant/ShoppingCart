@@ -31,7 +31,11 @@ public class PhotonRoomSystem : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.AutomaticallySyncScene = true;
 
-        if (PhotonNetwork.IsConnectedAndReady)
+        if (!PhotonNetwork.IsConnectedAndReady)
+        {
+            PhotonNetwork.ConnectUsingSettings();
+        }
+        else
         {
             PhotonNetwork.JoinLobby();
         }
@@ -59,6 +63,12 @@ public class PhotonRoomSystem : MonoBehaviourPunCallbacks
     #endregion
 
     #region Photon Callback Methods
+
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("Connected again.");
+        PhotonNetwork.JoinLobby();
+    }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {

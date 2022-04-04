@@ -1,40 +1,68 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
-public class GoodComponent : MonoBehaviour
+namespace ShoppingCart.Scripts.Goods
 {
-    public int Score;
-    public delegate void GoodPurchasing(int score, GameObject good);
-    public static event GoodPurchasing OnGoodPurchasing;
+    [RequireComponent(typeof(XRSimpleInteractable))]
+    public class GoodComponent : MonoBehaviour
+    {
+        public int Score;
+        public int Exp = 1;
 
-    private bool _canCalculate;
-    private GameObject _player;
-    private const float _DISTANCETODESTORY = 2f; 
-    
-    private void Start()
-    {
-        _canCalculate = false;
-    }
+        private const float _DISTANCE_TO_DESTROY = 0.5f;
 
-    private void Update()
-    {
-        if(!_canCalculate) return;
-        var distance = Vector3.Distance(_player.transform.position, transform.position);
-        if(distance >= _DISTANCETODESTORY) return;
-        Destroy(gameObject);
-    }
+        private bool _isSelected = false;
+        private float _selectTimer = .0f;
+        
+        private Color _originalColor;
+        
+        private PurchaseHand _player;
 
-    public void StartCalculateDistance(GameObject player)
-    {
-        _player = player;
-        _canCalculate = true;
-    }
-    
-    public void BePurchased()
-    {
-        OnGoodPurchasing?.Invoke(Score, gameObject);
+        private void Start()
+        {
+            _originalColor = GetComponent<MeshRenderer>().material.color;
+            
+            GetComponent<XRSimpleInteractable>().selectExited.AddListener(OnSelectExit);
+        }
+
+        private void Update()
+        {
+            if (!_isSelected || !gameObject) return;
+            
+            _selectTimer += Time.deltaTime;
+            
+            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, _selectTimer);
+            
+            transform.position = Vector3.Lerp(transform.position, _player.transform.position, _selectTimer);
+            
+            if (!(_selectTimer >= 0.99f)) return;
+            
+            _player.GetScore(gameObject);
+        }
+
+
+        public void OnSelectExit(SelectExitEventArgs eventArgs)
+        {
+            if (_isSelected) return;
+
+            _player = eventArgs.interactorObject.transform.GetComponent<PurchaseHand>();
+
+            if (_player == null || _player.IsPurchasing) return;
+            
+            _player.PurchaseGoods(Score, Exp);
+
+            _isSelected = true;
+        }
+
+        public void OnHoverEnter()
+        {
+            GetComponent<MeshRenderer>().material.color = Color.red;
+        }
+
+        public void OnHoverExit()
+        {
+            GetComponent<MeshRenderer>().material.color = _originalColor;
+        }
     }
 }

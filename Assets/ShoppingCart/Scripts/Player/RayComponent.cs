@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ShoppingCart.Scripts.Goods;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -16,17 +17,17 @@ public class RayComponent : MonoBehaviour
 {
     public DeviceName MyDevice;
     
-    private LineRenderer _lineRenderer;
-    private XRRayInteractor _xrRayInteractor;
-    private XRInteractorLineVisual _interactorLineVisual;
+    public ScoreComponent ScoreComponent;
 
-    private bool _isPressedButton;
+    public bool CanPurchase => canPurchase;
+
+    private XRRayInteractor _xrRayInteractor;
     
+    private bool _isPressedButton;
+    private bool canPurchase;
     private void Start()
     {
-        _lineRenderer = GetComponent<LineRenderer>();
         _xrRayInteractor = GetComponent<XRRayInteractor>();
-        _interactorLineVisual = GetComponent<XRInteractorLineVisual>();
     }
 
     private void Update()
@@ -37,21 +38,23 @@ public class RayComponent : MonoBehaviour
                 DeviceManager.Instance.LeftHandDevice.TryGetFeatureValue(CommonUsages.gripButton, out _isPressedButton);
                 break;
             case DeviceName.RightHand:
-                DeviceManager.Instance.RightHandDevice.TryGetFeatureValue(CommonUsages.gripButton, out _isPressedButton);
+                DeviceManager.Instance.RightHandDevice.TryGetFeatureValue(CommonUsages.gripButton,
+                    out _isPressedButton);
                 break;
             default:
                 return;
         }
 
+        if (!_isPressedButton) return;
+
         var ray = new Ray(transform.position, transform.forward);
 
         if (!Physics.Raycast(ray, out var hitInfo, _xrRayInteractor.maxRaycastDistance)) return;
-        
+
         if (!hitInfo.collider.GetComponent<GoodComponent>()) return;
 
-        Debug.Log("Can Be Purchased");
-        // if (!_interactorLineVisual || !_lineRenderer) return;
-        //_interactorLineVisual.enabled = _isPressedButton;
-        // _lineRenderer.enabled = _isPressedButton;
+        canPurchase = true;
+        
+        Debug.Log("CanPurchased");
     }
 }

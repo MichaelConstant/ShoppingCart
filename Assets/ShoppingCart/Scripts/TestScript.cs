@@ -7,14 +7,11 @@ using UnityEngine.XR;
 
 public class TestScript : MonoBehaviour
 {
-
-    public void OnTestEnter()
+    private void Update()
     {
-        Debug.Log("Enter");
-    }
-
-    public void OnTestEnd()
-    {
-        Debug.Log(("Exit"));
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GetComponent<MeshRenderer>().material.color = Color.red;
+        }
     }
 }

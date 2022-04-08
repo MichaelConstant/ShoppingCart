@@ -39,6 +39,13 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - UpdateScoreToRemote
+  - SetNewExp
+  - SetNewScore
+  - InstantiateNewPropRPC
+  - PlayerBeShootRPC
+  - SetNewExpRPC
+  - SetNewScoreRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

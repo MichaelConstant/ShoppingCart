@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ShoppingCart.Scripts.Goods.Props;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;

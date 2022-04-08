@@ -20,7 +20,8 @@ namespace ShoppingCart.Scripts.Goods
 
         public PropInventory PropInventory;
         public float DestroyTime = 5f;
-
+        public ScoreComponent ScoreComponent;
+        
         private bool _isPressedButton;
 
         private bool _firstSwitch;
@@ -98,6 +99,13 @@ namespace ShoppingCart.Scripts.Goods
             if (!PropInventory || !PropInventory.CurrentProp) return;
 
             var shootProp = Instantiate(PropInventory.CurrentProp, transform.position, transform.rotation);
+            
+            shootProp.Guid = new Guid();
+            if (ScoreComponent)
+            {
+                shootProp.Guid = ScoreComponent.Guid;
+            }
+            
             Destroy(shootProp, DestroyTime);
 
             PropInventory.ShootProp();

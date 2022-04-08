@@ -50,7 +50,17 @@ public class PhotonRoomSystem : MonoBehaviourPunCallbacks
 
     public void OnTestButtonClicked()
     {
-        _mapType = ConstantLibrary.MAP_TYPE_VALUE_TEST;
+        JoinRoomWithMapType(ConstantLibrary.MAP_TYPE_VALUE_TEST);
+    }
+
+    public void OnLevelDesignButtonClicked()
+    {
+        JoinRoomWithMapType(ConstantLibrary.MAP_TYPE_VALUE_LEVEL);
+    }
+
+    private void JoinRoomWithMapType(string newMapType)
+    {
+        _mapType = newMapType;
 
         var roomProperties = new ExitGames.Client.Photon.Hashtable()
         {
@@ -89,9 +99,14 @@ public class PhotonRoomSystem : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(ConstantLibrary.MAP_TYPE_KEY, out var mapType))
             return;
 
-        if ((string) mapType == ConstantLibrary.MAP_TYPE_VALUE_TEST)
+        switch ((string) mapType)
         {
-            PhotonNetwork.LoadLevel("TestGameScene");
+            case ConstantLibrary.MAP_TYPE_VALUE_TEST:
+                PhotonNetwork.LoadLevel("TestGameScene");
+                break;
+            case ConstantLibrary.MAP_TYPE_VALUE_LEVEL:
+                PhotonNetwork.LoadLevel("SampleScene");
+                break;
         }
     }
 

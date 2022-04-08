@@ -18,9 +18,14 @@ namespace ShoppingCart.Scripts.Goods
 
         public static event OnChangePropHandler OnChangeProp;
         
-        private void Awake()
+        private void OnEnable()
         {
             ScoreComponent.OnGetProp += GetProp;
+        }
+
+        private void OnDisable()
+        {
+            ScoreComponent.OnGetProp -= GetProp;
         }
 
         private void GetProp()
@@ -38,7 +43,6 @@ namespace ShoppingCart.Scripts.Goods
         
         public void ShootProp()
         {
-            Debug.Log("Shoot");
             _currentProp = null;
             OnChangeProp?.Invoke(0);
         }

@@ -2338,6 +2338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyDevice: 0
   PropInventory: {fileID: 421610222979435566}
+  DestroyTime: 5
 --- !u!1 &3668314917172951261
 GameObject:
   m_ObjectHideFlags: 0
@@ -7133,6 +7134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyDevice: 1
   PropInventory: {fileID: 421610222979435566}
+  DestroyTime: 5
 --- !u!1 &3668314917890064250
 GameObject:
   m_ObjectHideFlags: 0

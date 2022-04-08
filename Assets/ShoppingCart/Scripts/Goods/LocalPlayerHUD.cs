@@ -15,11 +15,18 @@ namespace ShoppingCart.Scripts.Goods
 
         public List<Image> PropImage = new List<Image>();
 
-        private void Awake()
+        private void OnEnable()
         {
             ScoreComponent.OnGetScore += UpdateExpBar;
             ScoreComponent.OnGetScore += UpdateScoreText;
             PropInventory.OnChangeProp += UpdatePropImage;
+        }
+
+        private void OnDisable()
+        {
+            ScoreComponent.OnGetScore -= UpdateExpBar;
+            ScoreComponent.OnGetScore -= UpdateScoreText;
+            PropInventory.OnChangeProp -= UpdatePropImage;
         }
 
         private void Start()

@@ -9,10 +9,10 @@ namespace ShoppingCart.Scripts.Goods
         public bool IsPurchasing => _isPurchasing;
         private bool _isPurchasing = false;
 
-        private int _currentScore;
+        private float _currentScore;
         private int _currentExp;
 
-        public void PurchaseGoods(int score, int exp)
+        public void PurchaseGoods(float score, int exp)
         {
             _isPurchasing = true;
             _currentScore = score;

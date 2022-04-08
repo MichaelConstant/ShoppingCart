@@ -7,7 +7,7 @@ namespace ShoppingCart.Scripts.Goods
     [RequireComponent(typeof(XRSimpleInteractable))]
     public class GoodComponent : MonoBehaviour
     {
-        public int Score;
+        public float Score;
         public int Exp = 1;
 
         private const float _DISTANCE_TO_DESTROY = 0.5f;

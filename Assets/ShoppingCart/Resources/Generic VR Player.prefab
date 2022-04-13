@@ -2363,7 +2363,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyDevice: 0
   PropInventory: {fileID: 421610222979435566}
-  DestroyTime: 5
   ScoreComponent: {fileID: 3668314916742346237}
 --- !u!1 &3668314917172951261
 GameObject:
@@ -7160,7 +7159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyDevice: 1
   PropInventory: {fileID: 421610222979435566}
-  DestroyTime: 5
   ScoreComponent: {fileID: 3668314916742346237}
 --- !u!1 &3668314917890064250
 GameObject:

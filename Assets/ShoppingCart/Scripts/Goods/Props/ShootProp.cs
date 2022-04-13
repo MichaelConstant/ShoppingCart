@@ -8,13 +8,25 @@ namespace ShoppingCart.Scripts.Goods.Props
     public class ShootProp : PropBase
     {
         public float ShootSpeed = 10f;
-
+        
         private Rigidbody _rigidbody;
+
+        private float _destroySelfTimer;
 
         public void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
             _rigidbody.velocity += transform.forward * ShootSpeed;
+        }
+
+        private void Update()
+        {
+            _destroySelfTimer += Time.deltaTime;
+            
+            if (_destroySelfTimer >= DestroySelfTime)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
 
         private void OnTriggerEnter(Collider other)

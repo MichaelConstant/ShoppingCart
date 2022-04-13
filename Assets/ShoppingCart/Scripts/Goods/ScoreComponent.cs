@@ -51,9 +51,11 @@ namespace ShoppingCart.Scripts.Goods
 
             this.photonView.RPC(nameof(SetNewScoreRPC), RpcTarget.AllBuffered, score);
 
+            FindObjectOfType<ScoreBoardUIComponent>().UpdateScoreBoard();
+
             OnGetScore?.Invoke();
         }
-        
+
         public void BeShoot()
         {
             this.photonView.RPC(nameof(PlayerBeShootRPC), RpcTarget.All);
@@ -61,9 +63,17 @@ namespace ShoppingCart.Scripts.Goods
 
         public void InstantiateProp(PropBase prop, Transform trans)
         {
-            this.photonView.RPC(nameof(InstantiateNewPropRPC), RpcTarget.All, prop, trans);
+            // this.photonView.RPC(nameof(InstantiateNewPropRPC), RpcTarget.All, prop, trans);
+            var usedPropGameObject = PhotonNetwork.Instantiate(prop.name, trans.position, Quaternion.identity);
+
+            var usedProp = usedPropGameObject.GetComponent<PropBase>();
+
+            if (!usedProp) return;
+
+            usedProp.Guid = new Guid();
+            usedProp.Guid = Guid;
         }
-        
+
         #region RPC methods
 
         [PunRPC]
@@ -98,16 +108,14 @@ namespace ShoppingCart.Scripts.Goods
         private void PlayerBeShootRPC()
         {
             if (!HasCourtesyCard) return;
-            
+
             HasCourtesyCard = false;
-            
+
             var position = transform.position - Vector3.back * 2f;
-            
+
             CourtesyCardRegenerator.Instance.SpawnCourtesyCardAtPosition(position);
         }
-        
+
         #endregion
-
-
     }
 }

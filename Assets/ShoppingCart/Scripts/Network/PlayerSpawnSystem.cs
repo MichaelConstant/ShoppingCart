@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using ShoppingCart.Scripts.Network;
 using Unity.Mathematics;
 
 public class PlayerSpawnSystem : MonoBehaviour
@@ -16,6 +17,7 @@ public class PlayerSpawnSystem : MonoBehaviour
         if (PhotonNetwork.IsConnectedAndReady)
         {
             PhotonNetwork.Instantiate(_genericVRPlayerPrefab.name, SpawnPosition, Quaternion.identity);
+            FindObjectOfType<ActorsSpawnDestroySystem>().InitializeGameActors();
         }
     }
 }

@@ -22,8 +22,7 @@ namespace ShoppingCart.Scripts.Goods
         public void GetScore(GameObject good)
         {
             if (!good) return;
-
-            Destroy(good);
+            
             _scoreComponent.GetScore(_currentScore, _currentExp);
             _isPurchasing = false;
             _currentScore = 0;

@@ -7,5 +7,7 @@ namespace ShoppingCart.Scripts.Goods.Props
     public class PropBase : MonoBehaviourPun
     {
         public Guid Guid;
+
+        public float DestroySelfTime = 10f;
     }
 }

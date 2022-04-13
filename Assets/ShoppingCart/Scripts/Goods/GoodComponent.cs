@@ -1,4 +1,5 @@
 using System;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -39,6 +40,8 @@ namespace ShoppingCart.Scripts.Goods
             if (!(_selectTimer >= 0.99f)) return;
             
             _player.GetScore(gameObject);
+            
+            PhotonNetwork.Destroy(gameObject);
         }
 
 

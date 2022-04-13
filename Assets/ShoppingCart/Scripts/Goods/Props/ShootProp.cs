@@ -1,4 +1,5 @@
 ﻿using System;
+using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 
@@ -27,5 +28,6 @@ namespace ShoppingCart.Scripts.Goods.Props
                 Destroy(gameObject);
             }
         }
+        
     }
 }

@@ -87,4 +87,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afe63923083c490eb272abc8b4050e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DestroySelfTime: 10
   ShootSpeed: 10

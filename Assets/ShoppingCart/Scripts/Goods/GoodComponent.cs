@@ -1,12 +1,13 @@
 using System;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 namespace ShoppingCart.Scripts.Goods
 {
     [RequireComponent(typeof(XRSimpleInteractable))]
-    public class GoodComponent : MonoBehaviour
+    public class GoodComponent : MonoBehaviourPun
     {
         public float Score;
         public int Exp = 1;
@@ -19,12 +20,22 @@ namespace ShoppingCart.Scripts.Goods
         private Color _originalColor;
         
         private PurchaseHand _player;
-
+        
         private void Start()
         {
             _originalColor = GetComponent<MeshRenderer>().material.color;
-            
+
             GetComponent<XRSimpleInteractable>().selectExited.AddListener(OnSelectExit);
+        }
+
+        private void OnEnable()
+        {
+            GetComponent<XRSimpleInteractable>().selectExited.AddListener(OnSelectExit);
+        }
+
+        private void OnDisable()
+        {
+            GetComponent<XRSimpleInteractable>().selectExited.RemoveListener(OnSelectExit);
         }
 
         private void Update()
@@ -40,11 +51,11 @@ namespace ShoppingCart.Scripts.Goods
             if (!(_selectTimer >= 0.99f)) return;
             
             _player.GetScore(gameObject);
-            
-            PhotonNetwork.Destroy(gameObject);
+
+            this.photonView.RPC(nameof(SetSelfInvalidRPC), RpcTarget.AllBuffered);   
+            // PhotonNetwork.Destroy(gameObject);
         }
-
-
+        
         public void OnSelectExit(SelectExitEventArgs eventArgs)
         {
             if (_isSelected) return;
@@ -66,6 +77,12 @@ namespace ShoppingCart.Scripts.Goods
         public void OnHoverExit()
         {
             GetComponent<MeshRenderer>().material.color = _originalColor;
+        }
+
+        [PunRPC]
+        private void SetSelfInvalidRPC()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

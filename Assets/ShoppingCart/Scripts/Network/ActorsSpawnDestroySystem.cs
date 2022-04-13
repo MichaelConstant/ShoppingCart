@@ -10,6 +10,9 @@ namespace ShoppingCart.Scripts.Network
 {
     public class ActorsSpawnDestroySystem : MonoBehaviourPun
     {
+        public List<ScoreComponent> Players { get; private set; }
+        public List<GoodComponent> Goods { get; private set; }
+        
         public static ActorsSpawnDestroySystem Instance;
 
         private void Awake()
@@ -24,22 +27,13 @@ namespace ShoppingCart.Scripts.Network
             }
         }
 
-        public List<ScoreComponent> Players;
-        public List<GoodComponent> Goods { get; set; }
-
-
         #region Public Methods
 
         public void InitializeGameActors()
         {
             this.photonView.RPC(nameof(InitializeGameActorsRPC), RpcTarget.AllBuffered);
         }
-
-        public void DestroyActor(GameObject rpcGameObject)
-        {
-            this.photonView.RPC(nameof(DestroyActorRPC), RpcTarget.AllBuffered, rpcGameObject);
-        }
-
+        
         #endregion
 
         #region RPC Methods
@@ -53,13 +47,6 @@ namespace ShoppingCart.Scripts.Network
             Goods = new List<GoodComponent>();
             Goods = FindObjectsOfType<GoodComponent>().ToList();
         }
-
-        [PunRPC]
-        public void DestroyActorRPC(GameObject rpcGameObject)
-        {
-            Destroy(rpcGameObject);
-        }
-
         #endregion
     }
 }

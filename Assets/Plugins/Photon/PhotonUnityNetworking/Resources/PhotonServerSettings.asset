@@ -49,6 +49,7 @@ MonoBehaviour:
   - DestroyActorRPC
   - InitializeGameActorsRPC
   - UpdateScoreBoardRPC
+  - SetSelfInvalidRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

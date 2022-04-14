@@ -9,5 +9,11 @@ namespace ShoppingCart.Scripts.Goods.Props
         public Guid Guid;
 
         public float DestroySelfTime = 10f;
+
+        [PunRPC]
+        protected void SetSelfInactiveRPC()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

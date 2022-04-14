@@ -63,8 +63,7 @@ namespace ShoppingCart.Scripts.Goods
 
         public void InstantiateProp(PropBase prop, Transform trans)
         {
-            // this.photonView.RPC(nameof(InstantiateNewPropRPC), RpcTarget.All, prop, trans);
-            var usedPropGameObject = PhotonNetwork.Instantiate(prop.name, trans.position, Quaternion.identity);
+            var usedPropGameObject = PhotonNetwork.Instantiate(prop.name, trans.position, trans.rotation);
 
             var usedProp = usedPropGameObject.GetComponent<PropBase>();
 
@@ -97,14 +96,6 @@ namespace ShoppingCart.Scripts.Goods
         }
 
         [PunRPC]
-        private void InstantiateNewPropRPC(PropBase prop, Transform trans)
-        {
-            var shootProp = Instantiate(prop, trans);
-            shootProp.Guid = new Guid();
-            shootProp.Guid = Guid;
-        }
-
-        [PunRPC]
         private void PlayerBeShootRPC()
         {
             if (!HasCourtesyCard) return;
@@ -112,6 +103,8 @@ namespace ShoppingCart.Scripts.Goods
             HasCourtesyCard = false;
 
             var position = transform.position - Vector3.back * 2f;
+            
+            DeviceManager.Instance.MutePlayerInput();
 
             CourtesyCardRegenerator.Instance.SpawnCourtesyCardAtPosition(position);
         }

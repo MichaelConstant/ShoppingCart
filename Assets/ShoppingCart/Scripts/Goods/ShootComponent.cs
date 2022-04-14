@@ -32,6 +32,8 @@ namespace ShoppingCart.Scripts.Goods
 
         private void Update()
         {
+            if(!DeviceManager.Instance.GetCanPlayerInput()) return;
+
             switch (MyDevice)
             {
                 case DeviceName.LeftHand:

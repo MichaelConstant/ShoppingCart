@@ -23,8 +23,10 @@ namespace ShoppingCart.Scripts.Goods
         private float _regeneratorTimer = .0f;
         private float _generateCoolDownTimer = .0f;
 
+        private Queue<GameObject> _courtesyCards = new Queue<GameObject>();
+
         public static event Action OnClearCourtesyCard;
-        
+
         private void Update()
         {
             if (!CourtesyCardGameObject || CourtesyCardSpawnTransforms == null) return;
@@ -41,6 +43,8 @@ namespace ShoppingCart.Scripts.Goods
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        #region Regenerator Methods
 
         private void RegeneratorBehaviour()
         {
@@ -67,6 +71,8 @@ namespace ShoppingCart.Scripts.Goods
 
             _GenerateState = GenerateState.Regenerator;
         }
+
+        #endregion
 
         private void ClearAllCourtesyCard()
         {

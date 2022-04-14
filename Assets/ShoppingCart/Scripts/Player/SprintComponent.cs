@@ -40,12 +40,15 @@ public class SprintComponent : MonoBehaviour
 
     private void Update()
     {
+        if(!DeviceManager.Instance.GetCanPlayerInput()) return;
+        
         DeviceManager.Instance.LeftHandDevice.TryGetFeatureValue(CommonUsages.triggerButton, out _isLeftHandButtonPressed);
         DeviceManager.Instance.RightHandDevice.TryGetFeatureValue(CommonUsages.triggerButton, out _isRightHandButtonPressed);
     }
 
     private void FixedUpdate()
     {
+        if(!DeviceManager.Instance.GetCanPlayerInput()) return;
         if (!_rigidbody) return;
 
         SprintMove(LeftHandGameObject, _isLeftHandButtonPressed, ref _isLeftHandSprint, ref _leftSprintTimer, ref _leftHandStartPos);

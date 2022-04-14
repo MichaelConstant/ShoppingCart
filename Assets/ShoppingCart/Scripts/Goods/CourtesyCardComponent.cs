@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 
 namespace ShoppingCart.Scripts.Goods
 {
-    public class CourtesyCardComponent : MonoBehaviour
+    public class CourtesyCardComponent : MonoBehaviourPun
     {
         private void OnEnable()
         {
@@ -18,7 +19,7 @@ namespace ShoppingCart.Scripts.Goods
 
         private void ClearCourtesyCard()
         {
-            Destroy(gameObject);
+            this.photonView.RPC(nameof(SetSelfInactiveRPC), RpcTarget.AllBuffered);
         }
         
         private void OnTriggerEnter(Collider other)
@@ -29,7 +30,13 @@ namespace ShoppingCart.Scripts.Goods
             
             playerScoreComponent.HasCourtesyCard = true;
             
-            Destroy(gameObject);
+            ClearCourtesyCard();
+        }
+
+        [PunRPC]
+        private void SetSelfInactiveRPC()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

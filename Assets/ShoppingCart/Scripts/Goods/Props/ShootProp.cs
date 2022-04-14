@@ -25,7 +25,7 @@ namespace ShoppingCart.Scripts.Goods.Props
 
             if (_destroySelfTimer < DestroySelfTime || !gameObject) return;
 
-            PhotonNetwork.Destroy(gameObject);
+            this.photonView.RPC(nameof(SetSelfInactiveRPC), RpcTarget.AllBuffered);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -36,7 +36,7 @@ namespace ShoppingCart.Scripts.Goods.Props
             {
                 scoreComponent.BeShoot();
                 
-                PhotonNetwork.Destroy(gameObject);
+                this.photonView.RPC(nameof(SetSelfInactiveRPC), RpcTarget.AllBuffered);
             }
         }
         

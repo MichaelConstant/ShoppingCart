@@ -52,8 +52,7 @@ namespace ShoppingCart.Scripts.Goods
             
             _player.GetScore(gameObject);
 
-            this.photonView.RPC(nameof(SetSelfInvalidRPC), RpcTarget.AllBuffered);   
-            // PhotonNetwork.Destroy(gameObject);
+            this.photonView.RPC(nameof(SetSelfInvalidRPC), RpcTarget.AllBuffered);
         }
         
         public void OnSelectExit(SelectExitEventArgs eventArgs)

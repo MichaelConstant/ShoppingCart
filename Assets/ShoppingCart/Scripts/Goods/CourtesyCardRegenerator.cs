@@ -25,7 +25,7 @@ namespace ShoppingCart.Scripts.Goods
 
         private Queue<GameObject> _courtesyCards = new Queue<GameObject>();
 
-        public static event Action OnClearCourtesyCard;
+        public event Action OnClearCourtesyCard;
 
         private void Update()
         {
@@ -88,6 +88,7 @@ namespace ShoppingCart.Scripts.Goods
 
         public void SpawnCourtesyCardAtPosition(Vector3 position)
         {
+            ClearAllCourtesyCard();
             PhotonNetwork.Instantiate(CourtesyCardGameObject.name, position, Quaternion.identity);
         }
     }

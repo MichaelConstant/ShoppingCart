@@ -9,12 +9,12 @@ namespace ShoppingCart.Scripts.Goods
     {
         private void OnEnable()
         {
-            CourtesyCardRegenerator.OnClearCourtesyCard += ClearCourtesyCard;
+            CourtesyCardRegenerator.Instance.OnClearCourtesyCard += ClearCourtesyCard;
         }
 
         private void OnDisable()
         {
-            CourtesyCardRegenerator.OnClearCourtesyCard -= ClearCourtesyCard;
+            CourtesyCardRegenerator.Instance.OnClearCourtesyCard -= ClearCourtesyCard;
         }
 
         private void ClearCourtesyCard()

@@ -17,16 +17,20 @@ namespace ShoppingCart.Scripts.Goods
 
         public delegate void OnChangePropHandler(int number);
 
-        public static event OnChangePropHandler OnChangeProp;
+        public event OnChangePropHandler OnChangeProp;
         
         private void OnEnable()
         {
-            ScoreComponent.OnGetProp += GetProp;
+            var scoreComponent = GetComponent<ScoreComponent>();
+            if (!scoreComponent) return;
+            GetComponent<ScoreComponent>().OnGetProp += GetProp;
         }
 
         private void OnDisable()
         {
-            ScoreComponent.OnGetProp -= GetProp;
+            var scoreComponent = GetComponent<ScoreComponent>();
+            if (!scoreComponent) return;
+            GetComponent<ScoreComponent>().OnGetProp -= GetProp;
         }
 
         private void GetProp()

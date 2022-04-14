@@ -10,7 +10,7 @@ namespace ShoppingCart.Scripts.Goods
     {
         [SerializeField] private Image ExpBar;
         [SerializeField] private TextMeshProUGUI ScoreText;
-        
+
         [SerializeField] private ScoreComponent ScoreComponent;
 
         public List<Image> PropImage = new List<Image>();
@@ -19,14 +19,18 @@ namespace ShoppingCart.Scripts.Goods
         {
             ScoreComponent.OnGetScore += UpdateExpBar;
             ScoreComponent.OnGetScore += UpdateScoreText;
-            PropInventory.OnChangeProp += UpdatePropImage;
+            var propInv = GetComponentInParent<PropInventory>();
+            if (!propInv) return;
+            propInv.OnChangeProp += UpdatePropImage;
         }
 
         private void OnDisable()
         {
             ScoreComponent.OnGetScore -= UpdateExpBar;
             ScoreComponent.OnGetScore -= UpdateScoreText;
-            PropInventory.OnChangeProp -= UpdatePropImage;
+            var propInv = GetComponentInParent<PropInventory>();
+            if (!propInv) return;
+            propInv.OnChangeProp -= UpdatePropImage;
         }
 
         private void Start()
@@ -52,7 +56,7 @@ namespace ShoppingCart.Scripts.Goods
 
         public void UpdatePropImage(int index)
         {
-            if(index > PropImage.Count) return;
+            if (index > PropImage.Count) return;
 
             foreach (var image in PropImage)
             {

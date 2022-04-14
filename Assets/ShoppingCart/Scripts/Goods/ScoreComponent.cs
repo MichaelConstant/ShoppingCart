@@ -20,17 +20,17 @@ namespace ShoppingCart.Scripts.Goods
 
         public delegate void GetPropHandler();
 
-        public static event GetScoreHandler OnGetScore;
-        public static event GetPropHandler OnGetProp;
+        public event GetScoreHandler OnGetScore;
+        public event GetPropHandler OnGetProp;
 
         private void OnEnable()
         {
-            CourtesyCardRegenerator.OnClearCourtesyCard += ClearCourtesyCard;
+            CourtesyCardRegenerator.Instance.OnClearCourtesyCard += ClearCourtesyCard;
         }
 
         private void OnDisable()
         {
-            CourtesyCardRegenerator.OnClearCourtesyCard -= ClearCourtesyCard;
+            CourtesyCardRegenerator.Instance.OnClearCourtesyCard -= ClearCourtesyCard;
         }
 
         private void Start()

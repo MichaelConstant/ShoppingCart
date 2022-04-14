@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -81,7 +82,7 @@ namespace ShoppingCart.Scripts.Goods
 
         public void SpawnCourtesyCardAtPosition(Vector3 position)
         {
-            Instantiate(CourtesyCardGameObject, position, Quaternion.identity);
+            PhotonNetwork.Instantiate(CourtesyCardGameObject.name, position, Quaternion.identity);
         }
     }
 }

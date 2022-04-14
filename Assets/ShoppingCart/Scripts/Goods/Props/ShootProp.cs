@@ -22,11 +22,10 @@ namespace ShoppingCart.Scripts.Goods.Props
         private void Update()
         {
             _destroySelfTimer += Time.deltaTime;
-            
-            if (_destroySelfTimer >= DestroySelfTime)
-            {
-                PhotonNetwork.Destroy(gameObject);
-            }
+
+            if (_destroySelfTimer < DestroySelfTime || !gameObject) return;
+
+            PhotonNetwork.Destroy(gameObject);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -37,7 +36,7 @@ namespace ShoppingCart.Scripts.Goods.Props
             {
                 scoreComponent.BeShoot();
                 
-                Destroy(gameObject);
+                PhotonNetwork.Destroy(gameObject);
             }
         }
         

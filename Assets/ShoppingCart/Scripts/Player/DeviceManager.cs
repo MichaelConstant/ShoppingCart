@@ -34,6 +34,8 @@ public class DeviceManager : Singleton<DeviceManager>
         {
             GetDevices();
         }
+
+        CanPlayerInput = true;
     }
 
     private void GetDevices()

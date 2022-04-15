@@ -1,6 +1,7 @@
 using System;
 using Photon.Pun;
 using ShoppingCart.Scripts.Goods.Props;
+using ShoppingCart.Scripts.Player;
 using UnityEngine;
 
 namespace ShoppingCart.Scripts.Goods
@@ -23,21 +24,20 @@ namespace ShoppingCart.Scripts.Goods
         public event GetScoreHandler OnGetScore;
         public event GetPropHandler OnGetProp;
 
+        public static event Action PlayerUpdateScore;
+
         private void OnEnable()
         {
             CourtesyCardRegenerator.Instance.OnClearCourtesyCard += ClearCourtesyCard;
+            Score = 0;
+            Exp = 0;
+            Guid = Guid.NewGuid();
+            Debug.Log($"Player {gameObject.name} | GUID {Guid}");
         }
 
         private void OnDisable()
         {
             CourtesyCardRegenerator.Instance.OnClearCourtesyCard -= ClearCourtesyCard;
-        }
-
-        private void Start()
-        {
-            Score = 0;
-            Exp = 0;
-            Guid = Guid.NewGuid();
         }
 
         private void ClearCourtesyCard()
@@ -51,7 +51,7 @@ namespace ShoppingCart.Scripts.Goods
 
             this.photonView.RPC(nameof(SetNewScoreRPC), RpcTarget.AllBuffered, score);
 
-            FindObjectOfType<ScoreBoardUIComponent>().UpdateScoreBoard();
+            PlayerUpdateScore?.Invoke();
 
             OnGetScore?.Invoke();
         }
@@ -72,9 +72,10 @@ namespace ShoppingCart.Scripts.Goods
             usedProp.Guid = new Guid();
             usedProp.Guid = Guid;
         }
+        
 
         #region RPC methods
-
+        
         [PunRPC]
         private void SetNewExpRPC(int exp)
         {
@@ -98,13 +99,13 @@ namespace ShoppingCart.Scripts.Goods
         [PunRPC]
         private void PlayerBeShootRPC()
         {
+            GetComponent<InputComponent>().MutePlayerInput();
+
             if (!HasCourtesyCard) return;
 
             HasCourtesyCard = false;
 
             var position = transform.position - Vector3.back * 2f;
-            
-            DeviceManager.Instance.MutePlayerInput();
 
             CourtesyCardRegenerator.Instance.SpawnCourtesyCardAtPosition(position);
         }

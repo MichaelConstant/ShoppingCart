@@ -91,5 +91,10 @@ namespace ShoppingCart.Scripts.Goods
             ClearAllCourtesyCard();
             PhotonNetwork.Instantiate(CourtesyCardGameObject.name, position, Quaternion.identity);
         }
+
+        private void OnDestroy()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

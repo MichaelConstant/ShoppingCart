@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ShoppingCart.Scripts.Player;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -24,6 +25,8 @@ public class SprintComponent : MonoBehaviour
     private bool _isLeftHandButtonPressed;
     private bool _isRightHandButtonPressed;
 
+    private InputComponent _inputComponent;
+
     [Space(5)]
     [Header("Velocity Arguments")]
     public float MaxMoveVelocity = 20f;
@@ -36,11 +39,13 @@ public class SprintComponent : MonoBehaviour
 
         _leftHandStartPos = LeftHandGameObject.transform.position;
         _rightHandStartPos = RightHandGameObject.transform.position;
+
+        _inputComponent = GetComponent<InputComponent>();
     }
 
     private void Update()
     {
-        if(!DeviceManager.Instance.GetCanPlayerInput()) return;
+        if(!_inputComponent.CanPlayerInput) return;
         
         DeviceManager.Instance.LeftHandDevice.TryGetFeatureValue(CommonUsages.triggerButton, out _isLeftHandButtonPressed);
         DeviceManager.Instance.RightHandDevice.TryGetFeatureValue(CommonUsages.triggerButton, out _isRightHandButtonPressed);
@@ -48,7 +53,7 @@ public class SprintComponent : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!DeviceManager.Instance.GetCanPlayerInput()) return;
+        if(!_inputComponent.CanPlayerInput) return;
         if (!_rigidbody) return;
 
         SprintMove(LeftHandGameObject, _isLeftHandButtonPressed, ref _isLeftHandSprint, ref _leftSprintTimer, ref _leftHandStartPos);

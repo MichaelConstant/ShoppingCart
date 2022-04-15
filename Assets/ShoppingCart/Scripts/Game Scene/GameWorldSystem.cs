@@ -27,7 +27,7 @@ namespace ShoppingCart.Scripts.Game_Scene
     
         #region Photon Callback Methods
 
-        public override void OnPlayerEnteredRoom(Player newPlayer)
+        public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
         {
             Debug.Log($"Player {newPlayer.NickName} entered the room.");
             Debug.Log("Current Room PlayerCount: " + PhotonNetwork.CurrentRoom.PlayerCount);

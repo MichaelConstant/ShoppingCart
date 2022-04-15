@@ -17,6 +17,7 @@ namespace ShoppingCart.Scripts.Goods.Props
         {
             _rigidbody = GetComponent<Rigidbody>();
             _rigidbody.velocity += transform.forward * ShootSpeed;
+            Debug.Log($"Good {gameObject.name} | GUID {Guid}");
         }
 
         private void Update()
@@ -39,6 +40,5 @@ namespace ShoppingCart.Scripts.Goods.Props
                 this.photonView.RPC(nameof(SetSelfInactiveRPC), RpcTarget.AllBuffered);
             }
         }
-        
     }
 }

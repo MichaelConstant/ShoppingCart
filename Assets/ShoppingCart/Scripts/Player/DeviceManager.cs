@@ -16,9 +16,6 @@ public class DeviceManager : Singleton<DeviceManager>
     private List<InputDevice> _leftHandDevices = new List<InputDevice>();
     private List<InputDevice> _rightHandDevices = new List<InputDevice>();
     
-    private const float _INPUT_RECOVER_TIME = 3f;
-
-    public bool CanPlayerInput { get; set; }
 
     private void OnEnable()
     {
@@ -34,8 +31,6 @@ public class DeviceManager : Singleton<DeviceManager>
         {
             GetDevices();
         }
-
-        CanPlayerInput = true;
     }
 
     private void GetDevices()
@@ -46,20 +41,5 @@ public class DeviceManager : Singleton<DeviceManager>
         RightHandDevice = _rightHandDevices.FirstOrDefault();
     }
 
-    public void MutePlayerInput()
-    {
-        CanPlayerInput = false;
-        
-        Invoke(nameof(AllowPlayerInput) , _INPUT_RECOVER_TIME);
-    }
 
-    public void AllowPlayerInput()
-    {
-        CanPlayerInput = true;
-    }
-
-    public bool GetCanPlayerInput()
-    {
-        return CanPlayerInput;
-    }
 }

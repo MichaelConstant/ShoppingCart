@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Photon.Pun;
@@ -12,6 +13,16 @@ namespace ShoppingCart.Scripts.Goods
         public List<TextMeshProUGUI> PlayerScoreTexts = new List<TextMeshProUGUI>();
         public ActorsSpawnDestroySystem ActorsSpawnDestroySystem;
 
+        private void OnEnable()
+        {
+            ScoreComponent.PlayerUpdateScore += UpdateScoreBoard;
+        }
+
+        private void OnDisable()
+        {
+            ScoreComponent.PlayerUpdateScore -= UpdateScoreBoard;
+        }
+        
         public void UpdateScoreBoard()
         {
             this.photonView.RPC(nameof(UpdateScoreBoardRPC), RpcTarget.All);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ShoppingCart.Scripts.Player;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -30,9 +31,16 @@ namespace ShoppingCart.Scripts.Goods
         private float _timer;
         private const float _SHOOT_COOLDOWN = 0.5f;
 
+        private InputComponent _inputComponent;
+
+        private void Start()
+        {
+            _inputComponent = GetComponentInParent<InputComponent>();
+        }
+
         private void Update()
         {
-            if(!DeviceManager.Instance.GetCanPlayerInput()) return;
+            if(!_inputComponent.CanPlayerInput) return;
 
             switch (MyDevice)
             {

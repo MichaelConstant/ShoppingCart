@@ -2,6 +2,7 @@ using System;
 using Photon.Pun;
 using ShoppingCart.Scripts.Goods.Props;
 using ShoppingCart.Scripts.Player;
+using ShoppingCart.Scripts.UI;
 using UnityEngine;
 
 namespace ShoppingCart.Scripts.Goods
@@ -17,8 +18,9 @@ namespace ShoppingCart.Scripts.Goods
 
         public Guid Guid;
 
+        public LocalPlayerTraceUIComponent LocalPlayerTraceUIComponent;
+        
         public delegate void GetScoreHandler();
-
         public delegate void GetPropHandler();
 
         public event GetScoreHandler OnGetScore;

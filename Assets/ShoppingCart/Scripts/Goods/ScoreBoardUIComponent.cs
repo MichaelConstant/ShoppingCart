@@ -11,7 +11,7 @@ namespace ShoppingCart.Scripts.Goods
     public class ScoreBoardUIComponent : MonoBehaviourPun
     {
         public List<TextMeshProUGUI> PlayerScoreTexts = new List<TextMeshProUGUI>();
-        public ActorsSpawnDestroySystem ActorsSpawnDestroySystem;
+        public PlayersInitializeSystem PlayersInitializeSystem;
 
         private void OnEnable()
         {
@@ -31,10 +31,10 @@ namespace ShoppingCart.Scripts.Goods
         [PunRPC]
         private void UpdateScoreBoardRPC()
         {
-            if (ActorsSpawnDestroySystem.Players == null) return;
+            if (PlayersInitializeSystem.Players == null) return;
 
             var scoreMostPlayerFirst =
-                ActorsSpawnDestroySystem.Players.OrderByDescending(player => player.Score).ToList();
+                PlayersInitializeSystem.Players.OrderByDescending(player => player.Score).ToList();
 
             for (var i = 0; i < PlayerScoreTexts.Count; i++)
             {

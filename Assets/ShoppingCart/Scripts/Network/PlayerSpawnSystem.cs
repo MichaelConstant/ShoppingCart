@@ -17,7 +17,7 @@ public class PlayerSpawnSystem : MonoBehaviour
         if (PhotonNetwork.IsConnectedAndReady)
         {
             PhotonNetwork.Instantiate(_genericVRPlayerPrefab.name, SpawnPosition, Quaternion.identity);
-            FindObjectOfType<ActorsSpawnDestroySystem>().InitializeGameActors();
+            FindObjectOfType<PlayersInitializeSystem>().InitializeGameActors();
         }
     }
 }

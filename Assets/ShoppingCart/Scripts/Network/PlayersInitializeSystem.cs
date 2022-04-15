@@ -8,12 +8,11 @@ using UnityEngine;
 
 namespace ShoppingCart.Scripts.Network
 {
-    public class ActorsSpawnDestroySystem : MonoBehaviourPun
+    public class PlayersInitializeSystem : MonoBehaviourPun
     {
         public List<ScoreComponent> Players { get; private set; }
-        public List<GoodComponent> Goods { get; private set; }
-        
-        public static ActorsSpawnDestroySystem Instance;
+
+        public static PlayersInitializeSystem Instance;
 
         private void Awake()
         {
@@ -43,9 +42,6 @@ namespace ShoppingCart.Scripts.Network
         {
             Players = new List<ScoreComponent>();
             Players = FindObjectsOfType<ScoreComponent>().ToList();
-
-            Goods = new List<GoodComponent>();
-            Goods = FindObjectsOfType<GoodComponent>().ToList();
         }
         #endregion
     }

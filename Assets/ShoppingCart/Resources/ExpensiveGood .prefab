@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4580354056396994002}
   - component: {fileID: 4203787336185101276}
   m_Layer: 8
-  m_Name: NewGood
+  m_Name: 'ExpensiveGood '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac23c9936a4802946b339b57ca45a994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Score: 3
+  Score: 300
   Exp: 1
 --- !u!114 &4580354056396994002
 MonoBehaviour:

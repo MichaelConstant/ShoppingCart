@@ -234,7 +234,8 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 0}
+    customRenderPipeline: {fileID: 11400000, guid: 97e7d99d3cb202247aa65192b09d9f3d,
+      type: 2}
     excludedTargetPlatforms:
     - iPhone
   - serializedVersion: 2

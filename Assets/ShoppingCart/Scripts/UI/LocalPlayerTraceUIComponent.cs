@@ -27,6 +27,8 @@ namespace ShoppingCart.Scripts.UI
 
         private List<ScoreComponent> _otherPlayers = new List<ScoreComponent>();
 
+        public event Action<ScoreComponent> OnUpdateImageInfo;
+
         private void Start()
         {
             _otherPlayers = FindOtherPlayers();
@@ -52,12 +54,14 @@ namespace ShoppingCart.Scripts.UI
             foreach (var player in players)
             {
                 var shouldHide = player.Mesh.isVisible;
+                
                 SetPlayerTagHidden(player, shouldHide);
-                if (!shouldHide)
-                {
-                    AdjustTagPosition(player);
-                    //UpdateTagInformation(player);
-                }
+                
+                if (shouldHide) continue;
+                
+                AdjustTagPosition(player);
+                
+                OnUpdateImageInfo?.Invoke(player);
             }
         }
 

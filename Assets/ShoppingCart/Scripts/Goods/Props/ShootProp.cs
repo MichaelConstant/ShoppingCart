@@ -13,11 +13,12 @@ namespace ShoppingCart.Scripts.Goods.Props
 
         private float _destroySelfTimer;
 
+        [SerializeField] private GameObject HitGameObject;
+
         public void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
             _rigidbody.velocity += transform.forward * ShootSpeed;
-            Debug.Log($"Good {gameObject.name} | GUID {Guid}");
         }
 
         private void Update()
@@ -36,6 +37,10 @@ namespace ShoppingCart.Scripts.Goods.Props
             if (scoreComponent && scoreComponent.Guid != Guid)
             {
                 scoreComponent.BeShoot();
+
+                var go = Instantiate(HitGameObject, transform.position, transform.rotation);
+                
+                Destroy(go, 1);
                 
                 this.photonView.RPC(nameof(SetSelfInactiveRPC), RpcTarget.AllBuffered);
             }

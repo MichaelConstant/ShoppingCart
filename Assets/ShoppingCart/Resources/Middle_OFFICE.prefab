@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4580354056396994002}
   - component: {fileID: 4203787336185101276}
   m_Layer: 8
-  m_Name: 'MiddleGood '
+  m_Name: Middle_OFFICE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ec80a67122cd7ce47837efdc67318a87, type: 2}
+  - {fileID: 2100000, guid: a8e6f9c1938954b4da91728fd486c809, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

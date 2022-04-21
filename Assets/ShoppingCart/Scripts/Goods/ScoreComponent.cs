@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Photon.Pun;
 using ShoppingCart.Scripts.Goods.Props;
 using ShoppingCart.Scripts.Player;
@@ -18,14 +19,12 @@ namespace ShoppingCart.Scripts.Goods
 
         public Guid Guid;
 
-        public LocalPlayerTraceUIComponent LocalPlayerTraceUIComponent;
-        
-        public delegate void GetScoreHandler();
-        public delegate void GetPropHandler();
+        public GameObject Model;
+        [HideInInspector]
+        public SkinnedMeshRenderer Mesh;
 
-        public event GetScoreHandler OnGetScore;
-        public event GetPropHandler OnGetProp;
-
+        public event Action OnGetScore;
+        public event Action OnGetProp;
         public static event Action PlayerUpdateScore;
 
         private void OnEnable()
@@ -40,6 +39,11 @@ namespace ShoppingCart.Scripts.Goods
         private void OnDisable()
         {
             CourtesyCardRegenerator.Instance.OnClearCourtesyCard -= ClearCourtesyCard;
+        }
+
+        private void Awake()
+        {
+            Mesh = Model.GetComponentsInChildren<SkinnedMeshRenderer>().FirstOrDefault();
         }
 
         private void ClearCourtesyCard()

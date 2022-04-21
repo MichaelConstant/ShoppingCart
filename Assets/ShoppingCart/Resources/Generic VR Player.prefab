@@ -1927,7 +1927,8 @@ MonoBehaviour:
   CourtesyPlus: 1.6
   MaxExp: 10
   Exp: 0
-  LocalPlayerTraceUIComponent: {fileID: 5075231658763766383}
+  Model: {fileID: 3668314918054236905}
+  Mesh: {fileID: 0}
 --- !u!114 &3668314916742346227
 MonoBehaviour:
   m_ObjectHideFlags: 0

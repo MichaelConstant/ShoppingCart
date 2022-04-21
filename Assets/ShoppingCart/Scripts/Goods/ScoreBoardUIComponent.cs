@@ -31,10 +31,10 @@ namespace ShoppingCart.Scripts.Goods
         [PunRPC]
         private void UpdateScoreBoardRPC()
         {
-            if (PlayersInitializeSystem.Players == null) return;
+            if (PlayersInitializeSystem.Instance.Players == null) return;
 
             var scoreMostPlayerFirst =
-                PlayersInitializeSystem.Players.OrderByDescending(player => player.Score).ToList();
+                PlayersInitializeSystem.Instance.Players.OrderByDescending(player => player.Score).ToList();
 
             for (var i = 0; i < PlayerScoreTexts.Count; i++)
             {

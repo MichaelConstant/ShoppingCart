@@ -3346,7 +3346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53a73852cefd7074f88f888bce5fa9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreComponent: {fileID: 3668314916742346237}
+  ScoreComponent: {fileID: 3668314916742346237}
 --- !u!114 &5871968483205222262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8143,7 +8143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53a73852cefd7074f88f888bce5fa9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreComponent: {fileID: 3668314916742346237}
+  ScoreComponent: {fileID: 3668314916742346237}
 --- !u!114 &1330636926901075986
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -111,8 +111,6 @@ GameObject:
   - component: {fileID: 7287436941252436207}
   - component: {fileID: 7287436941252436204}
   - component: {fileID: 7287436941252436205}
-  - component: {fileID: 7287436941252436206}
-  - component: {fileID: 7287436941252436201}
   m_Layer: 0
   m_Name: ScoreBoard
   m_TagString: Untagged
@@ -184,46 +182,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7287436941252436206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7287436941252436194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &7287436941252436201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7287436941252436194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5a88900a5c718246a263712d435b46e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerScoreTexts:
-  - {fileID: 7287436942229727326}
-  - {fileID: 7287436941421187934}
-  - {fileID: 7287436942090643251}
-  - {fileID: 7287436942028986648}
-  ActorsSpawnDestroySystem: {fileID: 7287436940860468518}
 --- !u!1 &7287436941381291596
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,6 +752,8 @@ GameObject:
   - component: {fileID: 7287436942200136112}
   - component: {fileID: 7287436942200136113}
   - component: {fileID: 7287436942200136118}
+  - component: {fileID: 6425231525180775055}
+  - component: {fileID: 8910957109352978666}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -901,6 +861,46 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
+--- !u!114 &6425231525180775055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7287436942200136116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &8910957109352978666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7287436942200136116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a88900a5c718246a263712d435b46e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerScoreTexts:
+  - {fileID: 7287436942229727326}
+  - {fileID: 7287436941421187934}
+  - {fileID: 7287436942090643251}
+  - {fileID: 7287436942028986648}
+  PlayersInitializeSystem: {fileID: 0}
 --- !u!1 &7287436942229727324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,4 +1357,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _genericVRPlayerPrefab: {fileID: 2293339905162026033, guid: 4867791f6db5a9446a77184d4b55ce31,
     type: 3}
-  SpawnPosition: {x: 0, y: 0, z: 0}

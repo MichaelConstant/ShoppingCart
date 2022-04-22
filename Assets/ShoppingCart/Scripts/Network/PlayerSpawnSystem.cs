@@ -36,14 +36,15 @@ public class PlayerSpawnSystem : MonoBehaviour
             } while (!_playerStartDic.ContainsKey(_index));
 
             var playerStart = _playerStartDic[_index];
-            
+
             Debug.Log(_index);
-            
-            PhotonNetwork.Instantiate(_genericVRPlayerPrefab.name, playerStart.transform.position, playerStart.transform.rotation);
+
+            PhotonNetwork.Instantiate(_genericVRPlayerPrefab.name, playerStart.transform.position,
+                playerStart.transform.rotation);
 
             _playerStartDic.Remove(_index);
-            
-            FindObjectOfType<PlayersInitializeSystem>().InitializeGameActors();
+
+            PlayersInitializeSystem.Instance.InitializeGameActors();
         }
     }
 }

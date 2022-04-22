@@ -1552,7 +1552,7 @@
     },
     "m_Name": "RimPower",
     "m_DefaultReferenceName": "Vector1_d623eb85a7064ae0973b2a5314deb147",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_RimPower",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,

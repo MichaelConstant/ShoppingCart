@@ -17,13 +17,16 @@ namespace ShoppingCart.Scripts.Goods
         private bool _isSelected = false;
         private float _selectTimer = .0f;
 
-        private Color _originalColor;
+        private float _originalRimPower;
+        private MeshRenderer _selfMeshRenderer;
 
         private PurchaseHand _player;
+        private static readonly int RimPower = Shader.PropertyToID("_RimPower");
 
         private void Start()
         {
-            _originalColor = GetComponent<MeshRenderer>().material.color;
+            _selfMeshRenderer = GetComponent<MeshRenderer>();
+            _originalRimPower = _selfMeshRenderer.material.GetFloat(RimPower);
         }
 
         private void OnEnable()
@@ -47,11 +50,11 @@ namespace ShoppingCart.Scripts.Goods
             transform.position = Vector3.Lerp(transform.position, _player.transform.position, _selectTimer);
 
             if (_selectTimer <= 0.9f) return;
-            
+
             _player.GetScore(gameObject);
-            
+
             if (!(_selectTimer >= 0.99f)) return;
-            
+
             this.photonView.RPC(nameof(SetSelfInvalidRPC), RpcTarget.AllBuffered);
         }
 
@@ -60,7 +63,7 @@ namespace ShoppingCart.Scripts.Goods
             if (_isSelected) return;
 
             _player = eventArgs.interactorObject.transform.GetComponent<PurchaseHand>();
-            
+
             if (_player == null || _player.IsPurchasing) return;
 
             _player.PurchaseGoods(Score, Exp);
@@ -70,12 +73,12 @@ namespace ShoppingCart.Scripts.Goods
 
         public void OnHoverEnter()
         {
-            GetComponent<MeshRenderer>().material.color = Color.red;
+            _selfMeshRenderer.material.SetFloat(RimPower, 1);
         }
 
         public void OnHoverExit()
         {
-            GetComponent<MeshRenderer>().material.color = _originalColor;
+            _selfMeshRenderer.material.SetFloat(RimPower, _originalRimPower);
         }
 
         [PunRPC]

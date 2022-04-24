@@ -23,12 +23,16 @@ namespace ShoppingCart.Scripts.Goods
         private float _regeneratorTimer = .0f;
         private float _generateCoolDownTimer = .0f;
 
+        private bool _canInstantiate = true;
+
         private Queue<GameObject> _courtesyCards = new Queue<GameObject>();
 
         public event Action OnClearCourtesyCard;
 
         private void Update()
         {
+            if (!_canInstantiate) return;
+
             if (!CourtesyCardGameObject || CourtesyCardSpawnTransforms == null) return;
 
             switch (_GenerateState)
@@ -92,8 +96,9 @@ namespace ShoppingCart.Scripts.Goods
             PhotonNetwork.Instantiate(CourtesyCardGameObject.name, position, Quaternion.identity);
         }
 
-        private void OnDestroy()
+        private void OnApplicationQuit()
         {
+            _canInstantiate = false;
             gameObject.SetActive(false);
         }
     }

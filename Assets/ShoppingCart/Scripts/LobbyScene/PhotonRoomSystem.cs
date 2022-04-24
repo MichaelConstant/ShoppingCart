@@ -105,7 +105,7 @@ public class PhotonRoomSystem : MonoBehaviourPunCallbacks
                 PhotonNetwork.LoadLevel("TestGameScene");
                 break;
             case ConstantLibrary.MAP_TYPE_VALUE_LEVEL:
-                PhotonNetwork.LoadLevel("SampleScene");
+                PhotonNetwork.LoadLevel("LevelOne");
                 break;
         }
     }

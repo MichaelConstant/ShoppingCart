@@ -78,8 +78,12 @@ namespace ShoppingCart.Scripts.Goods
             usedProp.Guid = new Guid();
             usedProp.Guid = Guid;
         }
-        
 
+        public static void ManuallyInvokePlayerUpdateScore()
+        {
+            PlayerUpdateScore?.Invoke();
+        }
+        
         #region RPC methods
         
         [PunRPC]

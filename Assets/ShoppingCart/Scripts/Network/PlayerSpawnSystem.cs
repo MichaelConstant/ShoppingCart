@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Photon.Pun;
+using ShoppingCart.Scripts.Goods;
 using ShoppingCart.Scripts.Network;
 using Unity.Mathematics;
 using Random = UnityEngine.Random;
@@ -45,6 +46,8 @@ public class PlayerSpawnSystem : MonoBehaviour
             _playerStartDic.Remove(_index);
 
             PlayersInitializeSystem.Instance.InitializeGameActors();
+
+            ScoreComponent.ManuallyInvokePlayerUpdateScore();
         }
     }
 }

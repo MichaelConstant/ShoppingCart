@@ -15,8 +15,11 @@ EditorBuildSettings:
     path: Assets/ShoppingCart/Scenes/TestGameScene.unity
     guid: be98bf85ea9a6b642995b9d463eb25d9
   - enabled: 1
-    path: Assets/ShoppingCart/LevelDesign/SampleScene.unity
+    path: Assets/ShoppingCart/Scenes/SampleScene.unity
     guid: c56cebd962707344489f9aeb7df3eecb
+  - enabled: 1
+    path: Assets/ShoppingCart/Scenes/LevelOne.unity
+    guid: c6916e63ae61fad4a9a6363eb484a255
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260,
       type: 2}

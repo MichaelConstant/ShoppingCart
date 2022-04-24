@@ -52110,6 +52110,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6425231525180775055, guid: 0479e6750b9a7284192107a6fb9ea0a8,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 252
+      objectReference: {fileID: 0}
     - target: {fileID: 7287436940860468519, guid: 0479e6750b9a7284192107a6fb9ea0a8,
         type: 3}
       propertyPath: sceneViewId
@@ -83476,14 +83481,14 @@ Transform:
   - {fileID: 1940994930}
   - {fileID: 1032970403}
   - {fileID: 2066091548}
+  - {fileID: 2073420780}
   - {fileID: 359357327}
   - {fileID: 1940243604}
+  - {fileID: 490505802}
   - {fileID: 1381153880}
   - {fileID: 892373119}
   - {fileID: 1656021158}
   - {fileID: 58007036}
-  - {fileID: 2073420780}
-  - {fileID: 490505802}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}

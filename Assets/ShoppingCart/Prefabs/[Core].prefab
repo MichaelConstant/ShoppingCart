@@ -1066,6 +1066,7 @@ Transform:
   - {fileID: 7287436942601616522}
   - {fileID: 7287436942553028019}
   - {fileID: 7287436940860468516}
+  - {fileID: 9216698095950014726}
   m_Father: {fileID: 7287436941231403037}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1282,6 +1283,7 @@ MonoBehaviour:
   CourtesyCardDuration: 60
   RegenerateTime: 120
   _GenerateState: 0
+  CanInstantiate: 0
 --- !u!1 &7287436942553370774
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,3 +1359,78 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _genericVRPlayerPrefab: {fileID: 2293339905162026033, guid: 4867791f6db5a9446a77184d4b55ce31,
     type: 3}
+--- !u!1001 &2812421229705894623
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7287436942287257238}
+    m_Modifications:
+    - target: {fileID: 6408604828565353433, guid: b5a3a3e81bbda6f41a1061b838831bea,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408604828565353433, guid: b5a3a3e81bbda6f41a1061b838831bea,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408604828565353433, guid: b5a3a3e81bbda6f41a1061b838831bea,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.224
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408604828565353433, guid: b5a3a3e81bbda6f41a1061b838831bea,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408604828565353433, guid: b5a3a3e81bbda6f41a1061b838831bea,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408604828565353433, guid: b5a3a3e81bbda6f41a1061b838831bea,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408604828565353433, guid: b5a3a3e81bbda6f41a1061b838831bea,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408604828565353433, guid: b5a3a3e81bbda6f41a1061b838831bea,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408604828565353433, guid: b5a3a3e81bbda6f41a1061b838831bea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408604828565353433, guid: b5a3a3e81bbda6f41a1061b838831bea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408604828565353433, guid: b5a3a3e81bbda6f41a1061b838831bea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408604828565353439, guid: b5a3a3e81bbda6f41a1061b838831bea,
+        type: 3}
+      propertyPath: m_Name
+      value: Game Over System
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b5a3a3e81bbda6f41a1061b838831bea, type: 3}
+--- !u!4 &9216698095950014726 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6408604828565353433, guid: b5a3a3e81bbda6f41a1061b838831bea,
+    type: 3}
+  m_PrefabInstance: {fileID: 2812421229705894623}
+  m_PrefabAsset: {fileID: 0}

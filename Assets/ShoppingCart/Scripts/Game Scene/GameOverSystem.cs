@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ShoppingCart.Scripts.Goods;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,14 +16,15 @@ public class GameOverSystem : Singleton<GameOverSystem>
     private float _countDownTimer = 3f;
     private int _countDownInt = 3;
 
-    [SerializeField] private TextMeshProUGUI CountDownTime;
-    [SerializeField] private TextMeshProUGUI StartGameTime;
-
     public float TotalTime = 360;
     private int _minutes;
     private int _seconds;
 
     public event Action OnGameStart;
+    public event Action OnCountdownEnd;
+    public event Action<int> OnCountTimerUpdate;
+    public event Action<int, int> OnStartTimerUpdate;
+    public event Action OnGameOver;
 
     private void Start()
     {
@@ -49,21 +51,24 @@ public class GameOverSystem : Singleton<GameOverSystem>
 
         UpdateCountDown();
 
-        if (_isGameRunning)
-        {
-            _gameStartTimer += Time.deltaTime;
+        UpdateGameRunning();
+    }
 
-            _minutes = (int) (TotalTime - _gameStartTimer) / 60;
-            
-            _seconds = (int) (TotalTime - _minutes * 60f);
-            
-            StartGameTime.text = "" + _minutes + " : " + _seconds;
+    private void UpdateGameRunning()
+    {
+        if (!_isGameRunning) return;
 
-            if (_gameStartTimer >= TotalTime)
-            {
-                Time.timeScale = 0;
-            }
-        }
+        _gameStartTimer += Time.deltaTime;
+        
+        _minutes = (int) (TotalTime - _gameStartTimer) / 60;
+        _seconds = (int) (TotalTime - _minutes * 60f - _gameStartTimer);
+        
+        OnStartTimerUpdate?.Invoke(_minutes, _seconds);
+        
+        if (!(_gameStartTimer >= TotalTime)) return;
+
+        Time.timeScale = 0;
+        OnGameOver?.Invoke();
     }
 
     private void UpdateCountDown()
@@ -79,7 +84,7 @@ public class GameOverSystem : Singleton<GameOverSystem>
         }
         else if (_countDownTimer <= _countDownInt)
         {
-            CountDown(_countDownInt);
+            OnCountTimerUpdate?.Invoke(_countDownInt);
             _countDownInt--;
         }
     }
@@ -87,17 +92,15 @@ public class GameOverSystem : Singleton<GameOverSystem>
     private void StartGame()
     {
         _isGameRunning = true;
+        CourtesyCardRegenerator.Instance.CanInstantiate = true;
+        OnCountdownEnd?.Invoke();
     }
-
-    private void CountDown(int countDownInt)
-    {
-        CountDownTime.text = "" + countDownInt;
-    }
-
+    
     private void StartCountDown()
     {
         _isCountDown = true;
     }
+    
 
     #region UI Callback Methods
 

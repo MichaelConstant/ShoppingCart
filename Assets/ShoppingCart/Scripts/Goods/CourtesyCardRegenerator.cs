@@ -23,7 +23,7 @@ namespace ShoppingCart.Scripts.Goods
         private float _regeneratorTimer = .0f;
         private float _generateCoolDownTimer = .0f;
 
-        private bool _canInstantiate = true;
+        public bool CanInstantiate = false;
 
         private Queue<GameObject> _courtesyCards = new Queue<GameObject>();
 
@@ -31,7 +31,7 @@ namespace ShoppingCart.Scripts.Goods
 
         private void Update()
         {
-            if (!_canInstantiate) return;
+            if (!CanInstantiate) return;
 
             if (!CourtesyCardGameObject || CourtesyCardSpawnTransforms == null) return;
 
@@ -98,7 +98,7 @@ namespace ShoppingCart.Scripts.Goods
 
         private void OnApplicationQuit()
         {
-            _canInstantiate = false;
+            CanInstantiate = false;
             gameObject.SetActive(false);
         }
     }

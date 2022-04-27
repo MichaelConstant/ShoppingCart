@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ShoppingCart.Scripts.Audio;
 using ShoppingCart.Scripts.Player;
 using UnityEngine;
 using UnityEngine.XR;
@@ -32,10 +33,12 @@ namespace ShoppingCart.Scripts.Goods
         private const float _SHOOT_COOLDOWN = 0.5f;
 
         private InputComponent _inputComponent;
+        private AudioSource _audioSource;
 
         private void Start()
         {
             _inputComponent = GetComponentInParent<InputComponent>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -110,6 +113,8 @@ namespace ShoppingCart.Scripts.Goods
             ScoreComponent.InstantiateProp(PropInventory.CurrentProp, transform);
             
             PropInventory.ShootProp();
+            
+            AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.PlayerHitOthers);
         }
     }
 }

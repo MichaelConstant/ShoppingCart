@@ -119,6 +119,8 @@ namespace ShoppingCart.Scripts.Goods
         private void PlayerBeShootRPC()
         {
             GetComponent<InputComponent>().MutePlayerInput();
+            
+            AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.PlayerBeingHurt);
 
             if (!HasCourtesyCard) return;
 

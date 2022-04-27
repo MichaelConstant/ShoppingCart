@@ -9,6 +9,14 @@ namespace ShoppingCart.Scripts.Goods
     [RequireComponent(typeof(XRSimpleInteractable))]
     public class GoodComponent : MonoBehaviourPun
     {
+        public enum GoodType
+        {
+            Low,
+            Middle,
+            Expensive
+        }
+
+        public GoodType Good;
         public float Score;
         public int Exp = 1;
 

@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac23c9936a4802946b339b57ca45a994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Good: 1
   Score: 200
   Exp: 1
 --- !u!114 &3810017372636147869

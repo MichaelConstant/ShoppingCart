@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Photon.Pun;
+using ShoppingCart.Scripts.Audio;
 using ShoppingCart.Scripts.Goods.Props;
 using ShoppingCart.Scripts.Player;
 using ShoppingCart.Scripts.UI;
@@ -20,8 +21,10 @@ namespace ShoppingCart.Scripts.Goods
         public Guid Guid;
 
         public GameObject Model;
-        [HideInInspector]
-        public SkinnedMeshRenderer Mesh;
+        [HideInInspector] public SkinnedMeshRenderer Mesh;
+
+        private AudioSource _audioSource;
+
 
         public event Action OnGetScore;
         public event Action OnGetProp;
@@ -44,10 +47,16 @@ namespace ShoppingCart.Scripts.Goods
         private void Awake()
         {
             Mesh = Model.GetComponentsInChildren<SkinnedMeshRenderer>().FirstOrDefault();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         private void ClearCourtesyCard()
         {
+            if (HasCourtesyCard)
+            {
+                AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.CouponLost);
+            }
+
             HasCourtesyCard = false;
         }
 
@@ -83,9 +92,9 @@ namespace ShoppingCart.Scripts.Goods
         {
             PlayerUpdateScore?.Invoke();
         }
-        
+
         #region RPC methods
-        
+
         [PunRPC]
         private void SetNewExpRPC(int exp)
         {
@@ -113,6 +122,8 @@ namespace ShoppingCart.Scripts.Goods
 
             if (!HasCourtesyCard) return;
 
+            AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.CouponLost);
+            
             HasCourtesyCard = false;
 
             var position = transform.position - Vector3.back * 2f;

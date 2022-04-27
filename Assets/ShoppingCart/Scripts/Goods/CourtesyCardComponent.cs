@@ -1,12 +1,22 @@
 using System;
 using System.Collections;
 using Photon.Pun;
+using ShoppingCart.Scripts.Audio;
 using UnityEngine;
 
 namespace ShoppingCart.Scripts.Goods
 {
     public class CourtesyCardComponent : MonoBehaviourPun
     {
+        private AudioSource _audioSource;
+
+        private void Start()
+        {
+            _audioSource = GetComponent<AudioSource>();
+
+            AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.CouponAppear);
+        }
+
         private void OnEnable()
         {
             CourtesyCardRegenerator.Instance.OnClearCourtesyCard += ClearCourtesyCard;
@@ -36,6 +46,8 @@ namespace ShoppingCart.Scripts.Goods
         [PunRPC]
         private void SetSelfInactiveRPC()
         {
+            AudioInventory.Instance.PlayAudioClipAtLocation(transform.position, AudioInventory.AudioEnum.CouponGet);
+            
             gameObject.SetActive(false);
         }
     }

@@ -24,7 +24,7 @@ MonoBehaviour:
     m_Value: 0
   exposure:
     m_OverrideState: 1
-    m_Value: 13
+    m_Value: 10.1
   multiplier:
     m_OverrideState: 0
     m_Value: 1
@@ -38,7 +38,7 @@ MonoBehaviour:
     m_Value: {x: 0.16490395, y: 0.2690272, z: 0.5}
   desiredLuxValue:
     m_OverrideState: 1
-    m_Value: 10000
+    m_Value: 1000
   updateMode:
     m_OverrideState: 0
     m_Value: 0

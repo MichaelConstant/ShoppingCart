@@ -22,9 +22,8 @@ namespace ShoppingCart.Scripts.Goods
         private void OnEnable()
         {
             CourtesyCardRegenerator.Instance.OnClearCourtesyCard += ClearCourtesyCard;
-            SpawnedParticle.SetActive(false);
+            SpawnedParticle.SetActive(true);
             TakenParticle.SetActive(false);
-            StartCoroutine(CreateParticle(SpawnedParticle));
         }
 
         private void OnDisable()

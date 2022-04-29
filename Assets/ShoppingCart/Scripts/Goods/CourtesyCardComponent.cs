@@ -9,6 +9,8 @@ namespace ShoppingCart.Scripts.Goods
     public class CourtesyCardComponent : MonoBehaviourPun
     {
         private AudioSource _audioSource;
+        [SerializeField] private GameObject SpawnedParticle;
+        [SerializeField] private GameObject TakenParticle;
 
         private void Start()
         {
@@ -20,11 +22,15 @@ namespace ShoppingCart.Scripts.Goods
         private void OnEnable()
         {
             CourtesyCardRegenerator.Instance.OnClearCourtesyCard += ClearCourtesyCard;
+            SpawnedParticle.SetActive(false);
+            TakenParticle.SetActive(false);
+            StartCoroutine(CreateParticle(SpawnedParticle));
         }
 
         private void OnDisable()
         {
             CourtesyCardRegenerator.Instance.OnClearCourtesyCard -= ClearCourtesyCard;
+            SpawnedParticle.SetActive(false);
         }
 
         private void ClearCourtesyCard()
@@ -43,10 +49,25 @@ namespace ShoppingCart.Scripts.Goods
             ClearCourtesyCard();
         }
 
+        private IEnumerator CreateParticle(GameObject particle)
+        {
+            particle.SetActive(true);
+
+            yield return new WaitForSeconds(1);
+            
+            particle.SetActive(false);
+
+            yield return null;
+        }
+
         [PunRPC]
         private void SetSelfInactiveRPC()
         {
             AudioInventory.Instance.PlayAudioClipAtLocation(transform.position, AudioInventory.AudioEnum.CouponGet);
+            
+            StopAllCoroutines();
+
+            StartCoroutine(CreateParticle(TakenParticle));
             
             gameObject.SetActive(false);
         }

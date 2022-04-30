@@ -57,6 +57,7 @@ MonoBehaviour:
   - InitializeIndexRPC
   - RemoveIndexRPC
   - ChangeModelRPC
+  - StartGameRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

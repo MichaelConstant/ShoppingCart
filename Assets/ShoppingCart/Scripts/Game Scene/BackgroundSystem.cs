@@ -7,12 +7,12 @@ namespace ShoppingCart.Scripts.Game_Scene
     {
         private void OnEnable()
         {
-            GameOverSystem.Instance.OnCountdownEnd += StartPlayMusic;
+            GameOverSystem.OnCountdownEnd += StartPlayMusic;
         }
 
         private void OnDisable()
         {
-            GameOverSystem.Instance.OnCountdownEnd -= StartPlayMusic;
+            GameOverSystem.OnCountdownEnd -= StartPlayMusic;
         }
 
         private void StartPlayMusic()

@@ -20,16 +20,16 @@ namespace ShoppingCart.Scripts.Game_Scene
 
         private void OnEnable()
         {
-            GameOverSystem.Instance.OnStartTimerUpdate += UpdateStartGameTime;
-            GameOverSystem.Instance.OnCountTimerUpdate += UpdateCountDown;
-            GameOverSystem.Instance.OnCountdownEnd += EndCountDown;
+            GameOverSystem.OnStartTimerUpdate += UpdateStartGameTime;
+            GameOverSystem.OnCountTimerUpdate += UpdateCountDown;
+            GameOverSystem.OnCountdownEnd += EndCountDown;
         }
 
         private void OnDisable()
         {
-            GameOverSystem.Instance.OnStartTimerUpdate -= UpdateStartGameTime;
-            GameOverSystem.Instance.OnCountTimerUpdate -= UpdateCountDown;
-            GameOverSystem.Instance.OnCountdownEnd -= EndCountDown;
+            GameOverSystem.OnStartTimerUpdate -= UpdateStartGameTime;
+            GameOverSystem.OnCountTimerUpdate -= UpdateCountDown;
+            GameOverSystem.OnCountdownEnd -= EndCountDown;
         }
 
         private void UpdateCountDown(int countDownInt)

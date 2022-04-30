@@ -1,4 +1,5 @@
 ﻿using System;
+using ShoppingCart.Scripts.Game_Scene;
 using UnityEngine;
 
 namespace ShoppingCart.Scripts.Player
@@ -11,7 +12,13 @@ namespace ShoppingCart.Scripts.Player
 
         private void OnEnable()
         {
-            CanPlayerInput = true;
+            CanPlayerInput = false;
+            GameOverSystem.OnCountdownEnd += AllowPlayerInput;
+        }
+
+        private void OnDisable()
+        {
+            GameOverSystem.OnCountdownEnd -= AllowPlayerInput;
         }
 
         public void MutePlayerInput()

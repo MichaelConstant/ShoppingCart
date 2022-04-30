@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ShoppingCart.Scripts.Game_Scene;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,12 +18,12 @@ namespace ShoppingCart.Scripts.Goods
 
         private void OnEnable()
         {
-            GameOverSystem.Instance.OnCountdownEnd += SetCanSpawn;
+            GameOverSystem.OnCountdownEnd += SetCanSpawn;
         }
 
         private void OnDisable()
         {
-            GameOverSystem.Instance.OnCountdownEnd -= SetCanSpawn;
+            GameOverSystem.OnCountdownEnd -= SetCanSpawn;
         }
 
         private void Start()

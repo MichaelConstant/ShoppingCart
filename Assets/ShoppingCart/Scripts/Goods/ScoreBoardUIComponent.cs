@@ -11,7 +11,7 @@ namespace ShoppingCart.Scripts.Goods
     public class ScoreBoardUIComponent : MonoBehaviourPun
     {
         public List<TextMeshProUGUI> PlayerScoreTexts = new List<TextMeshProUGUI>();
-        public PlayersInitializeSystem PlayersInitializeSystem;
+        public List<TextMeshProUGUI> PlayerNameTexts = new List<TextMeshProUGUI>();
 
         private void OnEnable()
         {
@@ -39,7 +39,8 @@ namespace ShoppingCart.Scripts.Goods
             for (var i = 0; i < PlayerScoreTexts.Count; i++)
             {
                 if (scoreMostPlayerFirst.Count < i + 1 || scoreMostPlayerFirst[i] == null) continue;
-
+                PlayerNameTexts[i].text =
+                    "" + scoreMostPlayerFirst[i].GetComponentInParent<PhotonView>().Owner.NickName;
                 PlayerScoreTexts[i].text = "" + scoreMostPlayerFirst[i].Score;
             }
         }

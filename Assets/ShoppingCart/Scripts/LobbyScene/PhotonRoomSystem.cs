@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using ShoppingCart.Scripts;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;

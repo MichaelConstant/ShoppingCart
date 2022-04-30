@@ -3245,7 +3245,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4
+    m_Bits: 5
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
   m_StartingSelectedInteractable: {fileID: 0}
@@ -3324,7 +3324,7 @@ MonoBehaviour:
   m_SphereCastRadius: 0.1
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 257
   m_RaycastTriggerInteraction: 1
   m_HitClosestOnly: 1
   m_HoverToSelect: 0
@@ -8139,7 +8139,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4
+    m_Bits: 5
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
   m_StartingSelectedInteractable: {fileID: 0}
@@ -8218,7 +8218,7 @@ MonoBehaviour:
   m_SphereCastRadius: 0.1
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 257
   m_RaycastTriggerInteraction: 1
   m_HitClosestOnly: 1
   m_HoverToSelect: 0
@@ -8723,6 +8723,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3668314918054236910}
+  - component: {fileID: 702407064910950026}
+  - component: {fileID: 2202740251650649307}
   m_Layer: 9
   m_Name: Mesh
   m_TagString: Untagged
@@ -8763,6 +8765,41 @@ Transform:
   m_Father: {fileID: 3668314917260910760}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &702407064910950026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3668314918054236905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1309ca2bffb45a39c7023b06bd2bf20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2202740251650649307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3668314918054236905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 0
+  ObservedComponents:
+  - {fileID: 0}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &3788632596061616051
 GameObject:
   m_ObjectHideFlags: 0

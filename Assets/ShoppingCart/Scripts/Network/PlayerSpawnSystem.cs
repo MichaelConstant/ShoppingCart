@@ -1,53 +1,60 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 using Photon.Pun;
 using ShoppingCart.Scripts.Goods;
-using ShoppingCart.Scripts.Network;
-using Unity.Mathematics;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PlayerSpawnSystem : MonoBehaviour
+namespace ShoppingCart.Scripts.Network
 {
-    [SerializeField] GameObject _genericVRPlayerPrefab;
-
-    private Dictionary<int, PlayerStartComponent> _playerStartDic = new Dictionary<int, PlayerStartComponent>();
-    private PlayerStartComponent[] _playerStartArray;
-    private int _index;
-
-    private void Awake()
+    public class PlayerSpawnSystem : MonoBehaviourPun
     {
-        _playerStartArray = FindObjectsOfType<PlayerStartComponent>();
+        [SerializeField] GameObject GenericVRPlayerPrefab;
 
-        for (var i = 0; i < _playerStartArray.Length; i++)
+        private PlayerStartComponent[] _playerStartArray;
+        private int _index;
+
+        private void Awake()
         {
-            _playerStartDic.Add(i, _playerStartArray[i]);
+            _playerStartArray = FindObjectsOfType<PlayerStartComponent>();
         }
-    }
 
-    private void Start()
-    {
-        if (PhotonNetwork.IsConnectedAndReady)
+        private void Start()
         {
-            do
+            if (PhotonNetwork.IsConnectedAndReady)
             {
-                _index = Random.Range(0, _playerStartArray.Length + 1);
-            } while (!_playerStartDic.ContainsKey(_index));
+                this.photonView.RPC(nameof(InitializeIndexRPC), RpcTarget.AllBuffered);
 
-            var playerStart = _playerStartDic[_index];
+                var player = PhotonNetwork.Instantiate(GenericVRPlayerPrefab.name,
+                    _playerStartArray[_index].transform.position,
+                    _playerStartArray[_index].transform.rotation);
 
-            Debug.Log(_index);
+                player.GetComponentInChildren<PlayerModelSelectionComponent>().UseModel(_index);
+                
+                this.photonView.RPC(nameof(RemoveIndexRPC), RpcTarget.AllBuffered);
 
-            PhotonNetwork.Instantiate(_genericVRPlayerPrefab.name, playerStart.transform.position,
-                playerStart.transform.rotation);
+                PlayersInitializeSystem.Instance.InitializeGameActors();
 
-            _playerStartDic.Remove(_index);
+                ScoreComponent.ManuallyInvokePlayerUpdateScore();
+            }
+        }
 
-            PlayersInitializeSystem.Instance.InitializeGameActors();
+        [PunRPC]
+        private void RemoveIndexRPC()
+        {
+            Destroy(_playerStartArray[_index].gameObject);
+            _playerStartArray = FindObjectsOfType<PlayerStartComponent>();
+        }
 
-            ScoreComponent.ManuallyInvokePlayerUpdateScore();
+        [PunRPC]
+        private void InitializeIndexRPC()
+        {
+            _index = GetPlayerStartIndex();
+        }
+
+        private int GetPlayerStartIndex()
+        {
+            var index = Random.Range(0, _playerStartArray.Length);
+            return index;
         }
     }
 }

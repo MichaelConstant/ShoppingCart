@@ -10,7 +10,7 @@ namespace ShoppingCart.Scripts.Network
 {
     public class PlayersInitializeSystem : MonoBehaviourPun
     {
-        public List<ScoreComponent> Players { get; private set; }
+        public List<ScoreComponent> Players = new List<ScoreComponent>();
 
         public static PlayersInitializeSystem Instance;
 
@@ -40,7 +40,6 @@ namespace ShoppingCart.Scripts.Network
         [PunRPC]
         public void InitializeGameActorsRPC()
         {
-            Players = new List<ScoreComponent>();
             Players = FindObjectsOfType<ScoreComponent>().ToList();
         }
         #endregion

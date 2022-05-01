@@ -1,16 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class LoginUISystem : MonoBehaviour
+namespace ShoppingCart.Scripts.Login_Scene
 {
-    public GameObject ConnectOptionsPanelGameObject;
-    public GameObject SignInPanelGameObject;
-
-    private void Start()
+    public class LoginUISystem : MonoBehaviour
     {
-        ConnectOptionsPanelGameObject.SetActive(true);
-        SignInPanelGameObject.SetActive(false);
+        public GameObject ConnectOptionsPanelGameObject;
+        public GameObject SignInPanelGameObject;
+
+        private void Start()
+        {
+            ConnectOptionsPanelGameObject.SetActive(true);
+            SignInPanelGameObject.SetActive(false);
+        }
+
+        public void OnTutorialClicked()
+        {
+            SceneManager.LoadScene("Tutorial");
+        }
     }
 }

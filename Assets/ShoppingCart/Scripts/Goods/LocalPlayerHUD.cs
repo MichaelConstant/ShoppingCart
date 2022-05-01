@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ShoppingCart.Scripts.Game_Scene;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ namespace ShoppingCart.Scripts.Goods
     {
         [SerializeField] private Image ExpBar;
         [SerializeField] private TextMeshProUGUI ScoreText;
+        [SerializeField] private TextMeshProUGUI TimeText;
 
         [SerializeField] private ScoreComponent ScoreComponent;
 
@@ -19,6 +21,7 @@ namespace ShoppingCart.Scripts.Goods
         {
             ScoreComponent.OnGetScore += UpdateExpBar;
             ScoreComponent.OnGetScore += UpdateScoreText;
+            GameOverSystem.OnStartTimerUpdate += UpdateTimeText;
             var propInv = GetComponentInParent<PropInventory>();
             if (!propInv) return;
             propInv.OnChangeProp += UpdatePropImage;
@@ -28,6 +31,7 @@ namespace ShoppingCart.Scripts.Goods
         {
             ScoreComponent.OnGetScore -= UpdateExpBar;
             ScoreComponent.OnGetScore -= UpdateScoreText;
+            GameOverSystem.OnStartTimerUpdate -= UpdateTimeText;
             var propInv = GetComponentInParent<PropInventory>();
             if (!propInv) return;
             propInv.OnChangeProp -= UpdatePropImage;
@@ -52,6 +56,13 @@ namespace ShoppingCart.Scripts.Goods
             if (!ScoreText || !ScoreComponent) return;
 
             ScoreText.text = ScoreComponent.Score.ToString();
+        }
+
+        private void UpdateTimeText(int minute, int second)
+        {
+            if (!TimeText) return;
+
+            TimeText.text = minute + " : " + second;
         }
 
         public void UpdatePropImage(int index)

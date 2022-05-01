@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ShoppingCart/Scenes/LevelOne.unity
     guid: c6916e63ae61fad4a9a6363eb484a255
+  - enabled: 1
+    path: Assets/ShoppingCart/Scenes/Tutorial.unity
+    guid: c9b71fd07299b7747ae4bb5738c3875e
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260,
       type: 2}

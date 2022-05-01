@@ -107,6 +107,11 @@ namespace ShoppingCart.Scripts.Game_Scene
         {
             _isCountDown = true;
         }
+
+        public Vector2 GetCurrentTimer()
+        {
+            return new Vector2(_minutes, _seconds);
+        }
     
 
         #region UI Callback Methods

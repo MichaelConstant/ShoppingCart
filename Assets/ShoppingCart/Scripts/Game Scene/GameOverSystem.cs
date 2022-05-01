@@ -2,6 +2,7 @@ using System;
 using Photon.Pun;
 using ShoppingCart.Scripts.Goods;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ShoppingCart.Scripts.Game_Scene
 {
@@ -74,6 +75,7 @@ namespace ShoppingCart.Scripts.Game_Scene
 
             Time.timeScale = 0;
             OnGameOver?.Invoke();
+            
         }
 
         private void UpdateCountDown()

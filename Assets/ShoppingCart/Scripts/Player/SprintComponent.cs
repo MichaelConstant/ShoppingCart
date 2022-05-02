@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ShoppingCart.Scripts.Audio;
 using ShoppingCart.Scripts.Player;
 using UnityEngine;
 using UnityEngine.XR;
@@ -8,6 +9,7 @@ using UnityEngine.XR;
 public class SprintComponent : MonoBehaviour
 {
     private Rigidbody _rigidbody;
+    private AudioSource _audioSource;
 
     public Transform ForwardResource;
     public GameObject RightHandGameObject;
@@ -36,6 +38,7 @@ public class SprintComponent : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _audioSource = GetComponent<AudioSource>();
 
         _leftHandStartPos = LeftHandGameObject.transform.position;
         _rightHandStartPos = RightHandGameObject.transform.position;
@@ -88,7 +91,7 @@ public class SprintComponent : MonoBehaviour
         var velocity = distance / timer;
         var acceleration = Mathf.Abs(velocity * (MaxMoveVelocity - _rigidbody.velocity.magnitude) / MaxMoveVelocity) * 30;
         _rigidbody.AddForce(ForwardResource.forward * acceleration);
-
+        AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.PlayerRun);
         isSprinting = false;
         startPosition = handObject.transform.position;
     }

@@ -19,6 +19,10 @@ namespace ShoppingCart.Scripts.Audio
             PlayerHitOthers,
             PropGet,
             PropShoot,
+            UIConfirm,
+            UISelect,
+            UICountdown,
+            PlayerRun,
         }
         
         [Serializable]

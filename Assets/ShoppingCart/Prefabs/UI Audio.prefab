@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7698792111201486619
+--- !u!1 &2487729142181249910
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7698792111201486621}
-  - component: {fileID: 7698792111201486620}
-  - component: {fileID: 7698792111201486622}
+  - component: {fileID: 3523780471305187996}
+  - component: {fileID: 2993847354524253306}
+  - component: {fileID: 690657919321303115}
   m_Layer: 0
-  m_Name: Audio Inventory
+  m_Name: UI Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7698792111201486621
+--- !u!4 &3523780471305187996
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7698792111201486619}
+  m_GameObject: {fileID: 2487729142181249910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,59 +32,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7698792111201486620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7698792111201486619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6720dd9de7fb472e9bc94dca99751474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AudioClips:
-  - AudioClip: {fileID: 8300000, guid: 2602385ab1b677d47a95c6917651f5ee, type: 3}
-    AudioEnum: 0
-  - AudioClip: {fileID: 8300000, guid: 048d0fcc0dade9e4c842dad1103475e8, type: 3}
-    AudioEnum: 1
-  - AudioClip: {fileID: 8300000, guid: 5023587addd835043bcf5f89e122665e, type: 3}
-    AudioEnum: 2
-  - AudioClip: {fileID: 8300000, guid: 42dd9be3cdbc4434e9413db6518140b1, type: 3}
-    AudioEnum: 3
-  - AudioClip: {fileID: 8300000, guid: bfd338884af30a0428b8b5245828d921, type: 3}
-    AudioEnum: 5
-  - AudioClip: {fileID: 8300000, guid: da996d987343d1c4094422aca473fe7e, type: 3}
-    AudioEnum: 4
-  - AudioClip: {fileID: 8300000, guid: a67bb1c69b09dc4479bee317a530ebcf, type: 3}
-    AudioEnum: 6
-  - AudioClip: {fileID: 8300000, guid: 4822a3bed61024b48b8c8ec748547a6e, type: 3}
-    AudioEnum: 7
-  - AudioClip: {fileID: 8300000, guid: 495a14803431b324e8ffcf0e95a87943, type: 3}
-    AudioEnum: 8
-  - AudioClip: {fileID: 8300000, guid: ed35c1ba06741dd4aaec185f93070970, type: 3}
-    AudioEnum: 9
-  - AudioClip: {fileID: 8300000, guid: b4b41544634d83640915634103e91687, type: 3}
-    AudioEnum: 10
-  - AudioClip: {fileID: 8300000, guid: 49db250a0ebe06246ba1a16f81fcae02, type: 3}
-    AudioEnum: 12
-  - AudioClip: {fileID: 8300000, guid: a481cf3db62cbda4aa36f5c747049e8c, type: 3}
-    AudioEnum: 11
-  - AudioClip: {fileID: 8300000, guid: d5b0969314b6d5e4d97c1e100bf12daa, type: 3}
-    AudioEnum: 13
---- !u!82 &7698792111201486622
+--- !u!82 &2993847354524253306
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7698792111201486619}
+  m_GameObject: {fileID: 2487729142181249910}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -129,7 +88,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -169,3 +128,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &690657919321303115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2487729142181249910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5b6adade904b7891dec605375e10db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

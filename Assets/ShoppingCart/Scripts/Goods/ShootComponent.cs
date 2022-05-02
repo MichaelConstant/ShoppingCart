@@ -114,7 +114,7 @@ namespace ShoppingCart.Scripts.Goods
             
             PropInventory.ShootProp();
             
-            AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.PlayerHitOthers);
+            AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.PropShoot);
         }
     }
 }

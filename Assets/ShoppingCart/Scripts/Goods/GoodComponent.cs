@@ -1,6 +1,7 @@
 using System;
 using Photon.Pun;
 using Photon.Realtime;
+using ShoppingCart.Scripts.Audio;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -76,6 +77,15 @@ namespace ShoppingCart.Scripts.Goods
 
             _player.PurchaseGoods(Score, Exp);
 
+            var audioEnum = Good switch
+            {
+                GoodComponent.GoodType.Low => AudioInventory.AudioEnum.LowGoodGet,
+                GoodComponent.GoodType.Middle => AudioInventory.AudioEnum.MiddleGoodGet,
+                GoodComponent.GoodType.Expensive => AudioInventory.AudioEnum.ExpensiveGoodGet,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            AudioInventory.Instance.PlayAudioClip(_player.AudioSource, audioEnum);
+            
             _isSelected = true;
         }
 

@@ -14,11 +14,12 @@ namespace ShoppingCart.Scripts.Goods
         private float _currentScore;
         private int _currentExp;
 
-        private AudioSource _audioSource;
+        [HideInInspector]
+        public AudioSource AudioSource;
 
         private void Start()
         {
-            _audioSource = GetComponent<AudioSource>();
+            AudioSource = GetComponent<AudioSource>();
         }
 
         public void PurchaseGoods(float score, int exp)
@@ -31,25 +32,6 @@ namespace ShoppingCart.Scripts.Goods
         public void GetScore(GameObject good)
         {
             if (!good) return;
-            var goodType = good.GetComponent<GoodComponent>().Good;
-
-            AudioInventory.AudioEnum audioEnum;
-            switch (goodType)
-            {
-                case GoodComponent.GoodType.Low:
-                    audioEnum = AudioInventory.AudioEnum.LowGoodGet;
-                    break;
-                case GoodComponent.GoodType.Middle:
-                    audioEnum = AudioInventory.AudioEnum.MiddleGoodGet;
-                    break;
-                case GoodComponent.GoodType.Expensive:
-                    audioEnum = AudioInventory.AudioEnum.ExpensiveGoodGet;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            
-            AudioInventory.Instance.PlayAudioClip(_audioSource, audioEnum);
             
             ScoreComponent.GetScore(_currentScore, _currentExp);
             _isPurchasing = false;

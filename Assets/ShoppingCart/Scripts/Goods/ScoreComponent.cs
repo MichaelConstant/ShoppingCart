@@ -73,6 +73,7 @@ namespace ShoppingCart.Scripts.Goods
 
         public void BeShoot()
         {
+            AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.PlayerBeingHurt);
             this.photonView.RPC(nameof(PlayerBeShootRPC), RpcTarget.All);
         }
 
@@ -120,7 +121,7 @@ namespace ShoppingCart.Scripts.Goods
         {
             GetComponent<InputComponent>().MutePlayerInput();
             
-            AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.PlayerBeingHurt);
+            AudioInventory.Instance.PlayAudioClipAtLocation(transform.position, AudioInventory.AudioEnum.PlayerHitOthers);
 
             if (!HasCourtesyCard) return;
 

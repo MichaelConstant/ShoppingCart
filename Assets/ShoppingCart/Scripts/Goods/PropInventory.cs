@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ShoppingCart.Scripts.Audio;
 using ShoppingCart.Scripts.Goods.Props;
 using UnityEngine;
 using UnityEngine.XR;
@@ -18,10 +19,13 @@ namespace ShoppingCart.Scripts.Goods
         public delegate void OnChangePropHandler(int number);
 
         public event OnChangePropHandler OnChangeProp;
+
+        private AudioSource _audioSource;
         
         private void OnEnable()
         {
             var scoreComponent = GetComponent<ScoreComponent>();
+            _audioSource = GetComponent<AudioSource>();
             if (!scoreComponent) return;
             GetComponent<ScoreComponent>().OnGetProp += GetProp;
         }
@@ -41,6 +45,8 @@ namespace ShoppingCart.Scripts.Goods
 
             var newProp = PropList[index];
 
+            AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.PropGet);
+            
             _currentProp = newProp;
 
             OnChangeProp?.Invoke(index + 1);

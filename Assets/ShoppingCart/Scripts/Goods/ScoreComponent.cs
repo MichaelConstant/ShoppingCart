@@ -19,7 +19,10 @@ namespace ShoppingCart.Scripts.Goods
         public int Exp = 0;
 
         public Guid Guid;
+        
         [SerializeField] private GameObject BeHurtGameObject;
+        [SerializeField] private GameObject GetCouponGameObject;
+        
         private const float _RECOVER_TIME = 1f;
 
         public GameObject Model;
@@ -43,12 +46,13 @@ namespace ShoppingCart.Scripts.Goods
 
         private void OnDisable()
         {
-            CourtesyCardRegenerator.Instance.OnClearCourtesyCard -= ClearCourtesyCard;
+            //CourtesyCardRegenerator.Instance.OnClearCourtesyCard -= ClearCourtesyCard;
         }
 
         private void Awake()
         {
             BeHurtGameObject.SetActive(false);
+            GetCouponGameObject.SetActive(false);
             Mesh = Model.GetComponentsInChildren<SkinnedMeshRenderer>().FirstOrDefault();
             _audioSource = GetComponent<AudioSource>();
         }
@@ -99,9 +103,20 @@ namespace ShoppingCart.Scripts.Goods
             PlayerUpdateScore?.Invoke();
         }
 
+        public void GetCoupon()
+        {
+            GetCouponGameObject.SetActive(true);
+            Invoke(nameof(SetGetCouponInactive), _RECOVER_TIME);
+        }
+
         private void SetBeHurtInactive()
         {
             BeHurtGameObject.SetActive(false);
+        }
+
+        private void SetGetCouponInactive()
+        {
+            GetCouponGameObject.SetActive(false);
         }
         
         #region RPC methods

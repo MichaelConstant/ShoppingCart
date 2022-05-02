@@ -41,7 +41,11 @@ namespace ShoppingCart.Scripts.Network
         [PunRPC]
         private void RemoveIndexRPC()
         {
-            Destroy(_playerStartArray[_index].gameObject);
+            if (_playerStartArray[_index].gameObject)
+            {
+                Destroy(_playerStartArray[_index].gameObject);
+            }
+
             _playerStartArray = FindObjectsOfType<PlayerStartComponent>();
         }
 

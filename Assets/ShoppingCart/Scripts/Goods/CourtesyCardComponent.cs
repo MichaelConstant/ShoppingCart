@@ -28,7 +28,7 @@ namespace ShoppingCart.Scripts.Goods
 
         private void OnDisable()
         {
-            CourtesyCardRegenerator.Instance.OnClearCourtesyCard -= ClearCourtesyCard;
+            // CourtesyCardRegenerator.Instance.OnClearCourtesyCard -= ClearCourtesyCard;
             SpawnedParticle.SetActive(false);
         }
 
@@ -43,6 +43,7 @@ namespace ShoppingCart.Scripts.Goods
             
             if (!playerScoreComponent || playerScoreComponent.HasCourtesyCard) return;
             
+            playerScoreComponent.GetCoupon();
             playerScoreComponent.HasCourtesyCard = true;
             
             ClearCourtesyCard();
@@ -66,7 +67,7 @@ namespace ShoppingCart.Scripts.Goods
             
             StopAllCoroutines();
 
-            StartCoroutine(CreateParticle(TakenParticle));
+            // StartCoroutine(CreateParticle(TakenParticle));
             
             gameObject.SetActive(false);
         }

@@ -77,10 +77,8 @@ namespace ShoppingCart.Scripts.Game_Scene
             OnStartTimerUpdate?.Invoke(_minutes, _seconds);
         
             if (!(_gameStartTimer >= TotalTime)) return;
-
-            Time.timeScale = 0;
-            OnGameOver?.Invoke();
             
+            OnGameOver?.Invoke();
         }
 
         private void UpdateCountDown()

@@ -24,7 +24,7 @@ using Random = UnityEngine.Random;
 
 public class PhotonRoomSystem : MonoBehaviourPunCallbacks
 {
-    public TextMeshProUGUI PlayerCountTextMeshPro;
+    // TextMeshProUGUI PlayerCountTextMeshPro;
 
     private string _mapType;
 
@@ -69,6 +69,11 @@ public class PhotonRoomSystem : MonoBehaviourPunCallbacks
         };
 
         PhotonNetwork.JoinRandomRoom(roomProperties, 0);
+    }
+
+    public void OnQuitButtonClicked()
+    {
+        Application.Quit();
     }
 
     #endregion
@@ -117,23 +122,23 @@ public class PhotonRoomSystem : MonoBehaviourPunCallbacks
         Debug.Log("Current Room Players: " + PhotonNetwork.CurrentRoom.PlayerCount);
     }
 
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
-    {
-        if (roomList.Count == 0)
-        {
-            // No Room At All
-            PlayerCountTextMeshPro.text = 0 + "/" + 4;
-        }
-
-        foreach (var room in roomList)
-        {
-            Debug.Log(room.Name);
-            if (room.Name.Contains(ConstantLibrary.MAP_TYPE_VALUE_TEST))
-            {
-                PlayerCountTextMeshPro.text = room.PlayerCount + "/" + 4;
-            }
-        }
-    }
+    //public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    // {
+    //     if (roomList.Count == 0)
+    //     {
+    //         // No Room At All
+    //         PlayerCountTextMeshPro.text = 0 + "/" + 4;
+    //     }
+    //
+    //     foreach (var room in roomList)
+    //     {
+    //         Debug.Log(room.Name);
+    //         if (room.Name.Contains(ConstantLibrary.MAP_TYPE_VALUE_TEST))
+    //         {
+    //             PlayerCountTextMeshPro.text = room.PlayerCount + "/" + 4;
+    //         }
+    //     }
+    // }
 
     public override void OnJoinedLobby()
     {

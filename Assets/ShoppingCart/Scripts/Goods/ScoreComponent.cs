@@ -19,6 +19,8 @@ namespace ShoppingCart.Scripts.Goods
         public int Exp = 0;
 
         public Guid Guid;
+        [SerializeField] private GameObject BeHurtGameObject;
+        private const float _RECOVER_TIME = 1f;
 
         public GameObject Model;
         [HideInInspector] public SkinnedMeshRenderer Mesh;
@@ -46,6 +48,7 @@ namespace ShoppingCart.Scripts.Goods
 
         private void Awake()
         {
+            BeHurtGameObject.SetActive(false);
             Mesh = Model.GetComponentsInChildren<SkinnedMeshRenderer>().FirstOrDefault();
             _audioSource = GetComponent<AudioSource>();
         }
@@ -73,6 +76,8 @@ namespace ShoppingCart.Scripts.Goods
 
         public void BeShoot()
         {
+            BeHurtGameObject.SetActive(true);
+            Invoke(nameof(SetBeHurtInactive), _RECOVER_TIME);
             AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.PlayerBeingHurt);
             this.photonView.RPC(nameof(PlayerBeShootRPC), RpcTarget.All);
         }
@@ -94,6 +99,11 @@ namespace ShoppingCart.Scripts.Goods
             PlayerUpdateScore?.Invoke();
         }
 
+        private void SetBeHurtInactive()
+        {
+            BeHurtGameObject.SetActive(false);
+        }
+        
         #region RPC methods
 
         [PunRPC]

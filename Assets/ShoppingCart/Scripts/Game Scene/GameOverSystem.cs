@@ -1,5 +1,6 @@
 using System;
 using Photon.Pun;
+using ShoppingCart.Scripts.Audio;
 using ShoppingCart.Scripts.Goods;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,8 +27,12 @@ namespace ShoppingCart.Scripts.Game_Scene
         public static event Action<int, int> OnStartTimerUpdate;
         public static event Action OnGameOver;
 
+        private AudioSource _audioSource;
+        private bool _isPlayingSound;
+
         private void Start()
         {
+            _audioSource = GetComponent<AudioSource>();
             Time.timeScale = 1;
             _countDownTimer = 3f;
         }
@@ -81,6 +86,12 @@ namespace ShoppingCart.Scripts.Game_Scene
         private void UpdateCountDown()
         {
             if (!_isCountDown) return;
+
+            if (!_isPlayingSound)
+            {
+                AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.UICountdown);
+                _isPlayingSound = true;
+            }
 
             _countDownTimer -= Time.deltaTime;
 

@@ -618,3 +618,7 @@ MonoBehaviour:
   CountDownTime: {fileID: 6185842903739864102}
   StartGameTime: {fileID: 6185842903473418098}
   StartText: {fileID: 6185842903578885971}
+  CountDown3: {fileID: 0}
+  CountDown2: {fileID: 0}
+  CountDown1: {fileID: 0}
+  StartGameObject: {fileID: 0}

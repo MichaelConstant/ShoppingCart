@@ -23,6 +23,20 @@ namespace ShoppingCart.Scripts.Network
             this.photonView.RPC(nameof(ChangeModelRPC), RpcTarget.AllBuffered, index);
         }
 
+        public void LocalUseModel(int index)
+        {
+            for (var i = 0; i < _models.Count; i++)
+            {
+                _models[i].SetActive(i == index);
+            }
+        }
+
+        public int GetModelIndex()
+        {
+            var usedModel = _models.FirstOrDefault(model => model.activeSelf);
+            return _models.IndexOf(usedModel);
+        }
+        
         [PunRPC]
         private void ChangeModelRPC(int index)
         {

@@ -1272,6 +1272,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Expensive Shelf
       objectReference: {fileID: 0}
+    - target: {fileID: 3009436913250101669, guid: 3f0369919364e784199216daf3e7e2c8,
+        type: 3}
+      propertyPath: LastTime
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009436913250101669, guid: 3f0369919364e784199216daf3e7e2c8,
+        type: 3}
+      propertyPath: RefreshTime
+      value: 999
+      objectReference: {fileID: 0}
     - target: {fileID: 3009436913250101690, guid: 3f0369919364e784199216daf3e7e2c8,
         type: 3}
       propertyPath: m_RootOrder

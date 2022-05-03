@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Photon.Pun;
 using ShoppingCart.Scripts.Goods;
 using UnityEngine;
@@ -9,8 +10,10 @@ namespace ShoppingCart.Scripts.Network
     public class PlayerSpawnSystem : MonoBehaviourPun
     {
         [SerializeField] GameObject GenericVRPlayerPrefab;
-
+        [SerializeField] private GameObject PlayerStartRPC;
+        
         private PlayerStartComponent[] _playerStartArray;
+        private List<GameObject> _playerStartRPCArray = new List<GameObject>();
         private int _index;
 
         private static PlayerSpawnSystem _instance;
@@ -25,7 +28,19 @@ namespace ShoppingCart.Scripts.Network
             {
                 _instance = this;
             }
-            _playerStartArray = FindObjectsOfType<PlayerStartComponent>();
+            
+            _playerStartRPCArray = GameObject.FindGameObjectsWithTag("PlayerStart").ToList();
+            if (_playerStartRPCArray == null || _playerStartRPCArray.Count == 0)
+            {
+                _playerStartArray = FindObjectsOfType<PlayerStartComponent>();
+                foreach (var playerStart in _playerStartArray)
+                {
+                    var newTransform = playerStart.transform;
+                    var newStart = PhotonNetwork.Instantiate(PlayerStartRPC.name, newTransform.position, newTransform.rotation);
+                    Destroy(playerStart);
+                    _playerStartRPCArray.Add(newStart);
+                }
+            }
         }
 
         private void Start()
@@ -33,14 +48,16 @@ namespace ShoppingCart.Scripts.Network
             if (PhotonNetwork.IsConnectedAndReady)
             {
                 this.photonView.RPC(nameof(InitializeIndexRPC), RpcTarget.AllBuffered);
-
+    
                 var player = PhotonNetwork.Instantiate(GenericVRPlayerPrefab.name,
-                    _playerStartArray[_index].transform.position,
-                    _playerStartArray[_index].transform.rotation);
-
+                    _playerStartRPCArray[_index].transform.position,
+                    _playerStartRPCArray[_index].transform.rotation);
+    
                 player.GetComponentInChildren<PlayerModelSelectionComponent>().UseModel(_index);
-                
+   
                 this.photonView.RPC(nameof(RemoveIndexRPC), RpcTarget.AllBuffered);
+
+                PhotonNetwork.Destroy(_playerStartRPCArray[_index].gameObject);
 
                 PlayersInitializeSystem.Instance.InitializeGameActors();
 
@@ -51,12 +68,10 @@ namespace ShoppingCart.Scripts.Network
         [PunRPC]
         private void RemoveIndexRPC()
         {
-            if (_playerStartArray[_index].gameObject)
+            if (_playerStartRPCArray[_index])
             {
-                Destroy(_playerStartArray[_index].gameObject);
+                _playerStartRPCArray = GameObject.FindGameObjectsWithTag("PlayerStart").ToList();
             }
-
-            _playerStartArray = FindObjectsOfType<PlayerStartComponent>();
         }
 
         [PunRPC]
@@ -67,7 +82,7 @@ namespace ShoppingCart.Scripts.Network
 
         private int GetPlayerStartIndex()
         {
-            var index = Random.Range(0, _playerStartArray.Length);
+            var index = Random.Range(0, _playerStartRPCArray.Count);
             return index;
         }
     }

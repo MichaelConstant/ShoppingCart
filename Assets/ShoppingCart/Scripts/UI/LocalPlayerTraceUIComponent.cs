@@ -20,6 +20,8 @@ namespace ShoppingCart.Scripts.UI
         private readonly Dictionary<ScoreComponent, Image> _player2Images = new Dictionary<ScoreComponent, Image>();
 
         [SerializeField] private List<Image> LocalImages;
+        [SerializeField] private float Width;
+        [SerializeField] private float Height;
 
         private List<ScoreComponent> _otherPlayers = new List<ScoreComponent>();
 
@@ -27,16 +29,24 @@ namespace ShoppingCart.Scripts.UI
 
         private void Start()
         {
+            InitializeOtherPlayers();
+        }
+
+        private void InitializeOtherPlayers()
+        {
             _otherPlayers = FindOtherPlayers();
 
             if (_otherPlayers == null) return;
 
             for (var i = 0; i < _otherPlayers.Count; i++)
             {
-                _player2Images.Add(_otherPlayers[i], LocalImages[i]);
+                if (!_player2Images.ContainsKey(_otherPlayers[i]))
+                {
+                    _player2Images.Add(_otherPlayers[i], LocalImages[i]);
+                }
             }
 
-            foreach (var image in LocalImages)
+            foreach (var image in LocalImages.Where(image => !_image2RectTransforms.ContainsKey(image)))
             {
                 _image2RectTransforms.Add(image, image.GetComponent<RectTransform>());
             }
@@ -44,7 +54,13 @@ namespace ShoppingCart.Scripts.UI
 
         private void Update()
         {
-            if (_otherPlayers == null) return;
+            if (_otherPlayers == null || _otherPlayers.Count == 0)
+            {
+                InitializeOtherPlayers();
+                return;
+            }
+
+            Debug.Log(_otherPlayers[0]);
             SetPlayersTagPositions(_otherPlayers);
         }
 
@@ -52,6 +68,7 @@ namespace ShoppingCart.Scripts.UI
         {
             foreach (var player in players)
             {
+                Debug.Log(player.name);
                 //var shouldHide = player.Mesh.isVisible;
 
                 //SetPlayerTagHidden(player, shouldHide);
@@ -67,19 +84,20 @@ namespace ShoppingCart.Scripts.UI
         private void AdjustTagPosition(ScoreComponent player)
         {
             var distanceVector = player.transform.position - MePlayer.transform.position;
-            var unitVector = new Vector3(distanceVector.x, 0, distanceVector.z).normalized;
+            var unitVector = new Vector2(distanceVector.z, distanceVector.x).normalized;
 
-            var angleCos = Vector3.Dot(unitVector, Vector3.back);
-            var angle = Mathf.Acos(angleCos) * Mathf.Rad2Deg * Mathf.Sign(unitVector.x);
+            var angleCos = Vector3.Dot(unitVector, Vector3.left);
+            //var angle = Mathf.Acos(angleCos) * Mathf.Rad2Deg * Mathf.Sign(unitVector.x);
+            var angle = Mathf.Acos(angleCos) * Mathf.Rad2Deg * -Mathf.Sign(distanceVector.z);
 
-            var screenPositionX = unitVector.x * 170f * Mathf.Sign(unitVector.x);
-            var screenPositionY = unitVector.y * 85f;
+            var screenPositionX = unitVector.y * Width * Mathf.Sign(unitVector.y);
+            var screenPositionY = unitVector.x * Height;
 
             var image = _player2Images[player];
             var imageRectTransform = _image2RectTransforms[image];
 
-            imageRectTransform.localPosition = new Vector3(screenPositionX, screenPositionY, 0);
-            imageRectTransform.localRotation = Quaternion.Euler(0, 0, angle);
+            imageRectTransform.localPosition = new Vector2(screenPositionX, screenPositionY);
+            imageRectTransform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
         private void SetPlayerTagHidden(ScoreComponent player, bool isHide)

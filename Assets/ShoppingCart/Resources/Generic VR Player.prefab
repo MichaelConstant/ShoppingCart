@@ -794,8 +794,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530555884154227768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -99.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -175.8}
+  m_LocalScale: {x: 0.082729556, y: 0.082729556, z: 0.082729556}
   m_Children:
   - {fileID: 7100370192108468309}
   - {fileID: 7499467591546658384}
@@ -825,6 +825,8 @@ MonoBehaviour:
   - {fileID: 3449858237054720356}
   - {fileID: 8902720565733966800}
   - {fileID: 2864598579315262720}
+  Width: 270
+  Height: 130
 --- !u!1 &1804117780294345622
 GameObject:
   m_ObjectHideFlags: 0
@@ -10586,6 +10588,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  Width: 0
+  Height: 0
 --- !u!1001 &624879764045289527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10707,6 +10711,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306414302159401344, guid: ba0d391f05759534bb3e301340f6c821,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6002514927065349202, guid: ba0d391f05759534bb3e301340f6c821,
         type: 3}
@@ -11064,6 +11073,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 3306414302159401344, guid: ba0d391f05759534bb3e301340f6c821,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7333623387024970370, guid: ba0d391f05759534bb3e301340f6c821,
         type: 3}
       propertyPath: ScoreComponent
@@ -11088,6 +11102,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HaveCoupon
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411575826108905888, guid: b70a3d8f013c94644ac1e8c7eee5db3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5411575826108905890, guid: b70a3d8f013c94644ac1e8c7eee5db3d,
         type: 3}

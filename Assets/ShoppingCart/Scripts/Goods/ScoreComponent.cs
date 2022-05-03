@@ -23,7 +23,7 @@ namespace ShoppingCart.Scripts.Goods
         [SerializeField] private GameObject BeHurtGameObject;
         [SerializeField] private GameObject GetCouponGameObject;
         
-        private const float _RECOVER_TIME = 1f;
+        private const float _RECOVER_TIME = 3f;
 
         public GameObject Model;
 
@@ -55,6 +55,11 @@ namespace ShoppingCart.Scripts.Goods
             GetCouponGameObject.SetActive(false);
             _audioSource = GetComponent<AudioSource>();
             _animator = Model.GetComponentInParent<Animator>();
+        }
+
+        private void Update()
+        {
+            GetCouponGameObject.SetActive(HasCourtesyCard);
         }
 
         private void ClearCourtesyCard()
@@ -106,7 +111,6 @@ namespace ShoppingCart.Scripts.Goods
         public void GetCoupon()
         {
             GetCouponGameObject.SetActive(true);
-            Invoke(nameof(SetGetCouponInactive), _RECOVER_TIME);
         }
 
         private void SetBeHurtInactive()

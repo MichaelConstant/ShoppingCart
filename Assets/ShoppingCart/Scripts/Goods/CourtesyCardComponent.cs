@@ -12,6 +12,8 @@ namespace ShoppingCart.Scripts.Goods
         [SerializeField] private GameObject SpawnedParticle;
         [SerializeField] private GameObject TakenParticle;
 
+        public static event Action<string> OnCouponSpawnOrTakeAway;
+        
         private void Start()
         {
             _audioSource = GetComponent<AudioSource>();
@@ -24,6 +26,8 @@ namespace ShoppingCart.Scripts.Goods
             CourtesyCardRegenerator.Instance.OnClearCourtesyCard += ClearCourtesyCard;
             SpawnedParticle.SetActive(true);
             TakenParticle.SetActive(false);
+            
+            OnCouponSpawnOrTakeAway?.Invoke("1230");
         }
 
         private void OnDisable()
@@ -47,6 +51,9 @@ namespace ShoppingCart.Scripts.Goods
             playerScoreComponent.HasCourtesyCard = true;
             
             ClearCourtesyCard();
+
+            var playerName = other.GetComponentInParent<PhotonView>().Owner.NickName;
+            OnCouponSpawnOrTakeAway?.Invoke(playerName);
         }
 
         private IEnumerator CreateParticle(GameObject particle)

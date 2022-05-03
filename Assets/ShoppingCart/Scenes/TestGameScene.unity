@@ -581,7 +581,6 @@ MonoBehaviour:
   m_Script: {fileID: 622653846}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Entries: []
 --- !u!4 &431062078
 Transform:
   m_ObjectHideFlags: 19
@@ -1558,6 +1557,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1452412211991931758, guid: 0479e6750b9a7284192107a6fb9ea0a8,
+        type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1452412211991931758, guid: 0479e6750b9a7284192107a6fb9ea0a8,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2670641280948987423, guid: 0479e6750b9a7284192107a6fb9ea0a8,
+        type: 3}
+      propertyPath: BGMList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2670641280948987423, guid: 0479e6750b9a7284192107a6fb9ea0a8,
+        type: 3}
+      propertyPath: BGMList.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: bfd338884af30a0428b8b5245828d921, type: 3}
+    - target: {fileID: 2670641280948987423, guid: 0479e6750b9a7284192107a6fb9ea0a8,
+        type: 3}
+      propertyPath: BGMList.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4822a3bed61024b48b8c8ec748547a6e, type: 3}
     - target: {fileID: 6425231525180775055, guid: 0479e6750b9a7284192107a6fb9ea0a8,
         type: 3}
       propertyPath: sceneViewId

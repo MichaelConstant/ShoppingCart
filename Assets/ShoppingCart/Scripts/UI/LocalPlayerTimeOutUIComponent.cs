@@ -41,8 +41,8 @@ namespace ShoppingCart.Scripts.UI
             StopAllCoroutines();
 
             StartCoroutine(playerName == "1230"
-                ? DisplayText("The Coupon Has Appeared!")
-                : DisplayText($"The Coupon was taken away by {playerName}."));
+                ? DisplayText("优惠券在中央刷新了！")
+                : DisplayText($"优惠券被{playerName}抢走了！"));
         }
 
         private IEnumerator DisplayText(string text)

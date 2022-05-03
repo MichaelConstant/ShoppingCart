@@ -30,6 +30,20 @@ namespace ShoppingCart.Scripts.Game_Scene
         private AudioSource _audioSource;
         private bool _isPlayingSound;
 
+        private GameOverSystem _instance;
+
+        private void Awake()
+        {
+            if (_instance != null && _instance != this)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                _instance = this;
+            }
+        }
+
         private void Start()
         {
             _audioSource = GetComponent<AudioSource>();

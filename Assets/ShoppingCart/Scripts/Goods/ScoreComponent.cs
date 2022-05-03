@@ -26,8 +26,8 @@ namespace ShoppingCart.Scripts.Goods
         private const float _RECOVER_TIME = 1f;
 
         public GameObject Model;
-        [HideInInspector] public SkinnedMeshRenderer Mesh;
 
+        private Animator _animator;
         private AudioSource _audioSource;
 
 
@@ -53,8 +53,8 @@ namespace ShoppingCart.Scripts.Goods
         {
             BeHurtGameObject.SetActive(false);
             GetCouponGameObject.SetActive(false);
-            Mesh = Model.GetComponentsInChildren<SkinnedMeshRenderer>().FirstOrDefault();
             _audioSource = GetComponent<AudioSource>();
+            _animator = Model.GetComponentInParent<Animator>();
         }
 
         private void ClearCourtesyCard()
@@ -148,6 +148,8 @@ namespace ShoppingCart.Scripts.Goods
             
             AudioInventory.Instance.PlayAudioClipAtLocation(transform.position, AudioInventory.AudioEnum.PlayerHitOthers);
 
+            _animator.SetTrigger("BeHurt");
+            
             if (!HasCourtesyCard) return;
 
             AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.CouponLost);

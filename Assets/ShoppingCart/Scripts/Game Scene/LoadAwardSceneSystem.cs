@@ -37,7 +37,9 @@ namespace ShoppingCart.Scripts.Game_Scene
                 foreach (var player in PlayersInitializeSystem.Instance.Players)
                 {
                     var playerNickname = player.GetComponentInParent<PhotonView>().Owner.NickName;
-                    var playerScore = player.Score;
+
+                    var playerScore = player.HasCourtesyCard ? player.Score * 1.2f : player.Score;
+
                     var playerMeshIndex = player.Model.GetComponent<PlayerModelSelectionComponent>().GetModelIndex();
                     playerName2ScoreDictionary.Add(playerNickname, playerScore);
                     playerName2MeshIndex.Add(playerNickname, playerMeshIndex);

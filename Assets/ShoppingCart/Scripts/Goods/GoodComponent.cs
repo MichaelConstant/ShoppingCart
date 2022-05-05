@@ -8,7 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 namespace ShoppingCart.Scripts.Goods
 {
     [RequireComponent(typeof(XRSimpleInteractable))]
-    public class GoodComponent : MonoBehaviourPun
+    public class GoodComponent : MonoBehaviourPun, IPunObservable
     {
         public enum GoodType
         {
@@ -103,6 +103,14 @@ namespace ShoppingCart.Scripts.Goods
         private void SetSelfInvalidRPC()
         {
             gameObject.SetActive(false);
+        }
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            while (stream.IsWriting)
+            {
+                
+            }
         }
     }
 }

@@ -13,11 +13,13 @@ namespace ShoppingCart.Scripts.Goods
         [SerializeField] private GameObject TakenParticle;
 
         public static event Action<string> OnCouponSpawnOrTakeAway;
+
+        private static CourtesyCardComponent _instance;
         
         private void Start()
         {
             _audioSource = GetComponent<AudioSource>();
-
+    
             AudioInventory.Instance.PlayAudioClip(_audioSource, AudioInventory.AudioEnum.CouponAppear);
         }
 
@@ -26,7 +28,14 @@ namespace ShoppingCart.Scripts.Goods
             CourtesyCardRegenerator.Instance.OnClearCourtesyCard += ClearCourtesyCard;
             SpawnedParticle.SetActive(true);
             TakenParticle.SetActive(false);
-            
+            if (_instance != null && _instance != this)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                _instance = this;
+            }
             OnCouponSpawnOrTakeAway?.Invoke("1230");
         }
 
@@ -34,6 +43,14 @@ namespace ShoppingCart.Scripts.Goods
         {
             // CourtesyCardRegenerator.Instance.OnClearCourtesyCard -= ClearCourtesyCard;
             SpawnedParticle.SetActive(false);
+        }
+
+        private void Update()
+        {
+            if (_instance != null && _instance != this)
+            {
+                Destroy(gameObject);
+            }
         }
 
         private void ClearCourtesyCard()

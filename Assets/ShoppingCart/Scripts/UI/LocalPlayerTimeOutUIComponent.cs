@@ -38,6 +38,7 @@ namespace ShoppingCart.Scripts.UI
  
         private void StartDisplayText(string playerName)
         {
+            CouponAlertText.gameObject.SetActive(true);
             StopAllCoroutines();
 
             StartCoroutine(playerName == "1230"

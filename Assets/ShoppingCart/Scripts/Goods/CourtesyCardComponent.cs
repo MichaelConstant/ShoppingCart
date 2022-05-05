@@ -28,14 +28,7 @@ namespace ShoppingCart.Scripts.Goods
             CourtesyCardRegenerator.Instance.OnClearCourtesyCard += ClearCourtesyCard;
             SpawnedParticle.SetActive(true);
             TakenParticle.SetActive(false);
-            if (_instance != null && _instance != this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                _instance = this;
-            }
+            
             OnCouponSpawnOrTakeAway?.Invoke("1230");
         }
 

@@ -42,8 +42,8 @@ namespace ShoppingCart.Scripts.Tutorial
         
         public void ShootProp()
         {
-            _currentProp = null;
-            OnChangeProp?.Invoke(0);
+            // _currentProp = null;
+            // OnChangeProp?.Invoke(0);
         }
     }
 }

@@ -22,6 +22,14 @@ namespace ShoppingCart.Scripts.Goods
             AudioSource = GetComponent<AudioSource>();
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown("R"))
+            {
+                _isPurchasing = false;
+            }
+        }
+
         public void PurchaseGoods(float score, int exp)
         {
             _isPurchasing = true;

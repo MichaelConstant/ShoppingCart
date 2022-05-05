@@ -63,6 +63,8 @@ namespace ShoppingCart.Scripts.Network
 
                 ScoreComponent.ManuallyInvokePlayerUpdateScore();
             }
+            PlayersInitializeSystem.Instance.InitializeGameActors();
+            ScoreComponent.ManuallyInvokePlayerUpdateScore();
         }
 
         [PunRPC]

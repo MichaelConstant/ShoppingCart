@@ -49,7 +49,7 @@ namespace ShoppingCart.Scripts.Tutorial
 
             if (Exp < MaxExp) return;
 
-            //OnGetProp?.Invoke();
+            OnGetProp?.Invoke();
 
             Exp -= MaxExp;
             
@@ -73,17 +73,6 @@ namespace ShoppingCart.Scripts.Tutorial
         public void GetCoupon()
         {
             GetCouponGameObject.SetActive(true);
-            Invoke(nameof(SetGetCouponInactive), _RECOVER_TIME);
-        }
-
-        private void SetBeHurtInactive()
-        {
-            BeHurtGameObject.SetActive(false);
-        }
-
-        private void SetGetCouponInactive()
-        {
-            GetCouponGameObject.SetActive(false);
         }
     }
 }

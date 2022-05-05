@@ -8,13 +8,13 @@ namespace ShoppingCart.Scripts.Tutorial
     public class TutorialSystem : Singleton<TutorialSystem>
     {
         private GameObject _player;
-        private ScoreComponent _playerScoreComponent;
+        private TutorialScoreComponent _playerScoreComponent;
         private InputComponent _playerInputComponent;
         
         private void Start()
         {
             _player = GameObject.FindGameObjectWithTag("Player");
-            _playerScoreComponent = _player.GetComponentInChildren<ScoreComponent>();
+            _playerScoreComponent = _player.GetComponentInChildren<TutorialScoreComponent>();
             _playerInputComponent = _player.GetComponentInChildren<InputComponent>();
 
             _playerInputComponent.AllowPlayerInput();

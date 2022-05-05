@@ -654,7 +654,7 @@ MonoBehaviour:
   CourtesyCardGameObject: {fileID: 1000431244217277323, guid: fa9ae7f3c8d35684998d79243f6d86ff,
     type: 3}
   CourtesyCardDuration: 60
-  RegenerateTime: 120
+  RegenerateTime: 60
   _GenerateState: 0
   CanInstantiate: 0
 --- !u!1 &7287436942553370774

@@ -2394,7 +2394,7 @@ MonoBehaviour:
   ForwardResource: {fileID: 3668314916729136180}
   RightHandGameObject: {fileID: 3668314918020967983}
   LeftHandGameObject: {fileID: 3668314916454176466}
-  MaxMoveVelocity: 20
+  MaxMoveVelocity: 15
   CriticalDistance: 0.15
 --- !u!114 &3668314916742346239
 MonoBehaviour:
@@ -2447,7 +2447,7 @@ MonoBehaviour:
   Score: 0
   HasCourtesyCard: 0
   CourtesyPlus: 1.6
-  MaxExp: 10
+  MaxExp: 5
   Exp: 0
   BeHurtGameObject: {fileID: 2460633615940508413}
   GetCouponGameObject: {fileID: 4559269507428403284}
